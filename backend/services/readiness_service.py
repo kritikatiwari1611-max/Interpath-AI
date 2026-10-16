@@ -80,8 +80,8 @@ def calculate_readiness_score(
     gap_result = analyze_skill_gap(role_id, user_skills)
     skills_score = gap_result["overall_match_pct"]
 
-    # 2. PROJECTS SCORE (0 to 100)
     # A project only counts if it exists AND matches projectKeywords or required skills
+    import re
     proj_keywords = [k.lower() for k in role_meta.get("projectKeywords", [])]
     req_skills = [s["name"].lower() for s in role_meta.get("requiredSkills", [])]
     match_terms = set(proj_keywords + req_skills)
@@ -89,7 +89,14 @@ def calculate_readiness_score(
     matched_projects = []
     for p in user_projects:
         searchable_text = f"{p.get('title', '')} {p.get('description', '')} {p.get('tech', '')}".lower()
-        if any(term in searchable_text for term in match_terms):
+        # Word boundary check to prevent substring false-positives (e.g. 'api' matching 'recipe')
+        matched = False
+        for term in match_terms:
+            pattern = r'\b' + re.escape(term) + r'\b'
+            if re.search(pattern, searchable_text):
+                matched = True
+                break
+        if matched:
             matched_projects.append(p)
             
     if not matched_projects:

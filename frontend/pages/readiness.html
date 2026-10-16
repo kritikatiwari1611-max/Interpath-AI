@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internship Readiness Score – InternPath AI</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="/" class="sidebar-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
+          <span>InternPath <span style="color:#3b82f6;">AI</span></span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="/pages/dashboard.html" class="nav-item">Dashboard</a>
+        <a href="/pages/profile.html" class="nav-item">My Profile</a>
+        <a href="/pages/roles.html" class="nav-item">Internship Roles</a>
+        <a href="/pages/skill-gap.html" class="nav-item">Skill Gap Analysis</a>
+        <a href="/pages/roadmap.html" class="nav-item">My Roadmap</a>
+        <a href="/pages/learning-hub.html" class="nav-item">Learning Hub</a>
+        <a href="/pages/projects.html" class="nav-item">Projects</a>
+        <a href="/pages/interview.html" class="nav-item">Interview Prep</a>
+        <a href="/pages/progress.html" class="nav-item">My Progress</a>
+        <a href="/pages/readiness.html" class="nav-item active">Readiness Score</a>
+        <a href="/pages/internships.html" class="nav-item">Find Internships</a>
+        <a href="/pages/settings.html" class="nav-item">Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button onclick="Auth.logout()" class="btn btn-secondary" style="width:100%; font-size:0.8rem; padding:6px;">Logout</button>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle-btn" id="sidebar-toggle">☰</button>
+          <h1 style="font-size: 1.15rem; font-weight: 600;">Transparent Readiness Scoring</h1>
+        </div>
+        <div class="topbar-right">
+          <!-- Multi-language selection for AI coaching tips -->
+          <div style="display: flex; align-items: center; gap: 8px;">
+            <label for="readiness-lang-select" style="font-size: 0.8rem; color: #64748b;">Tips Language:</label>
+            <select id="readiness-lang-select" class="form-control" style="font-size: 0.8rem; padding: 4px 8px; width: 110px;">
+              <option value="en">English</option>
+              <option value="hi">हिंदी / Hinglish</option>
+            </select>
+          </div>
+
+          <span class="badge-demo">Demo Mode</span>
+          <div class="three-dot-menu-container">
+            <button class="three-dot-btn" id="three-dot-btn" aria-haspopup="true" aria-expanded="false" title="Menu">⋮</button>
+            <div class="dropdown-menu" id="three-dot-dropdown" role="menu">
+              <a href="/pages/dashboard.html" class="dropdown-item">Dashboard</a>
+              <a href="/pages/profile.html" class="dropdown-item">My Profile</a>
+              <a href="/pages/roles.html" class="dropdown-item">Internship Roles</a>
+              <a href="/pages/skill-gap.html" class="dropdown-item">Skill Gap Analysis</a>
+              <a href="/pages/roadmap.html" class="dropdown-item">My Roadmap</a>
+              <a href="/pages/learning-hub.html" class="dropdown-item">Learning Hub</a>
+              <a href="/pages/projects.html" class="dropdown-item">Project Recommendations</a>
+              <a href="/pages/interview.html" class="dropdown-item">Interview Preparation</a>
+              <a href="/pages/progress.html" class="dropdown-item">My Progress</a>
+              <a href="/pages/readiness.html" class="dropdown-item">Internship Readiness</a>
+              <a href="/pages/internships.html" class="dropdown-item">Find Internships</a>
+              <a href="/pages/settings.html" class="dropdown-item">Settings</a>
+              <div class="dropdown-divider"></div>
+              <a href="javascript:void(0)" onclick="Auth.logout()" class="dropdown-item" style="color: #ef4444;">Logout</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-body" id="readiness-content"></main>
+
+      <footer class="footer-disclaimer">
+        InternPath AI gives preparation guidance, not a guarantee of selection. Sample internships are demo data.
+      </footer>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/ui.js"></script>
+  <script src="/js/menu.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/readiness.js"></script>
+</body>
+</html>
