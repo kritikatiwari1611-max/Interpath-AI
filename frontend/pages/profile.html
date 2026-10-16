@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Profile – InternPath AI</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="/" class="sidebar-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
+          <span>InternPath <span style="color:#3b82f6;">AI</span></span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="/pages/dashboard.html" class="nav-item">Dashboard</a>
+        <a href="/pages/profile.html" class="nav-item active">My Profile</a>
+        <a href="/pages/roles.html" class="nav-item">Internship Roles</a>
+        <a href="/pages/skill-gap.html" class="nav-item">Skill Gap Analysis</a>
+        <a href="/pages/roadmap.html" class="nav-item">My Roadmap</a>
+        <a href="/pages/learning-hub.html" class="nav-item">Learning Hub</a>
+        <a href="/pages/projects.html" class="nav-item">Projects</a>
+        <a href="/pages/interview.html" class="nav-item">Interview Prep</a>
+        <a href="/pages/progress.html" class="nav-item">My Progress</a>
+        <a href="/pages/readiness.html" class="nav-item">Readiness Score</a>
+        <a href="/pages/internships.html" class="nav-item">Find Internships</a>
+        <a href="/pages/settings.html" class="nav-item">Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button onclick="Auth.logout()" class="btn btn-secondary" style="width:100%; font-size:0.8rem; padding:6px;">Logout</button>
+      </div>
+    </aside>
+
+    <!-- Main Wrapper -->
+    <div class="main-wrapper">
+      <!-- Topbar with Three-dot (⋮) menu -->
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle-btn" id="sidebar-toggle" aria-label="Toggle Navigation">☰</button>
+          <h1 style="font-size: 1.15rem; font-weight: 600;">Student Academic & Skill Profile</h1>
+        </div>
+        <div class="topbar-right">
+          <span class="badge-demo">Demo Mode</span>
+          <!-- Three-dot menu -->
+          <div class="three-dot-menu-container">
+            <button class="three-dot-btn" id="three-dot-btn" aria-haspopup="true" aria-expanded="false" title="Menu">⋮</button>
+            <div class="dropdown-menu" id="three-dot-dropdown" role="menu">
+              <a href="/pages/dashboard.html" class="dropdown-item" role="menuitem">Dashboard</a>
+              <a href="/pages/profile.html" class="dropdown-item" role="menuitem">My Profile</a>
+              <a href="/pages/roles.html" class="dropdown-item" role="menuitem">Internship Roles</a>
+              <a href="/pages/skill-gap.html" class="dropdown-item" role="menuitem">Skill Gap Analysis</a>
+              <a href="/pages/roadmap.html" class="dropdown-item" role="menuitem">My Roadmap</a>
+              <a href="/pages/learning-hub.html" class="dropdown-item" role="menuitem">Learning Hub</a>
+              <a href="/pages/projects.html" class="dropdown-item" role="menuitem">Project Recommendations</a>
+              <a href="/pages/interview.html" class="dropdown-item" role="menuitem">Interview Preparation</a>
+              <a href="/pages/progress.html" class="dropdown-item" role="menuitem">My Progress</a>
+              <a href="/pages/readiness.html" class="dropdown-item" role="menuitem">Internship Readiness</a>
+              <a href="/pages/internships.html" class="dropdown-item" role="menuitem">Find Internships</a>
+              <a href="/pages/settings.html" class="dropdown-item" role="menuitem">Settings</a>
+              <div class="dropdown-divider"></div>
+              <a href="javascript:void(0)" onclick="Auth.logout()" class="dropdown-item" role="menuitem" style="color: #ef4444;">Logout</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Content Area -->
+      <main class="content-body" id="profile-content">
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 24px;">
+          
+          <!-- Left Column: Academic & Background Form -->
+          <div>
+            <div class="card">
+              <h2 class="card-title">Academic Background & Goals</h2>
+              <p class="card-subtitle">Keep your academic level and career aspirations updated.</p>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                  <label class="form-label" for="course">Degree / Course</label>
+                  <select id="course" class="form-control">
+                    <option value="BCA">BCA</option>
+                    <option value="B.Tech">B.Tech</option>
+                    <option value="B.Sc">B.Sc</option>
+                    <option value="B.Com">B.Com</option>
+                    <option value="BBA">BBA</option>
+                    <option value="MCA">MCA</option>
+                    <option value="MBA">MBA</option>
+                    <option value="Other">Other</option>
+                  </select>
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="specialization">Specialization / Stream</label>
+                  <input type="text" id="specialization" class="form-control" placeholder="e.g. Cloud, Accounting, AI">
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <div class="form-group">
+                  <label class="form-label" for="semester">Semester / Year</label>
+                  <input type="text" id="semester" class="form-control" placeholder="e.g. 6th Semester">
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="college">College / University</label>
+                  <input type="text" id="college" class="form-control" placeholder="College name">
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="career_goal">Primary Career Goal</label>
+                <input type="text" id="career_goal" class="form-control" placeholder="e.g. Backend Software Engineer">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="interests">Interests & Topics (comma separated)</label>
+                <input type="text" id="interests" class="form-control" placeholder="e.g. Cloud APIs, Valuation, UI Design">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="github_link">Portfolio / GitHub / LinkedIn Link</label>
+                <input type="url" id="github_link" class="form-control" placeholder="https://github.com/username">
+              </div>
+            </div>
+
+            <!-- Skills Editor -->
+            <div class="card">
+              <h2 class="card-title">My Skills & Proficiencies</h2>
+              <p class="card-subtitle">These are checked deterministically against your target internship role requirements.</p>
+
+              <div id="skills-list" style="margin-bottom: 20px;"></div>
+
+              <div style="background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px dashed #cbd5e1;">
+                <h4 style="font-size: 0.9rem; margin-bottom: 10px;">Add New Skill</h4>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                  <input type="text" id="new-skill-name" class="form-control" style="flex: 2; min-width: 160px;" placeholder="Skill (e.g. Python, SQL, Financial Modeling)">
+                  <select id="new-skill-level" class="form-control" style="flex: 1; min-width: 140px;">
+                    <option value="Beginner">Beginner (0.4)</option>
+                    <option value="Intermediate">Intermediate (0.7)</option>
+                    <option value="Advanced">Advanced (1.0)</option>
+                  </select>
+                  <button type="button" id="add-skill-btn" class="btn btn-secondary">Add Skill</button>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" id="save-profile-btn" class="btn btn-primary" style="padding: 12px 24px; font-size: 1rem;">
+              Save Profile Changes
+            </button>
+          </div>
+
+          <!-- Right Column: Resume Checklist & Projects -->
+          <div>
+            <!-- Resume Readiness Checklist -->
+            <div class="card">
+              <h2 class="card-title">Resume Checklist</h2>
+              <p class="card-subtitle">Directly contributes 15% to your deterministic readiness score.</p>
+
+              <div class="form-group">
+                <label class="form-label" for="resume_status">Overall Resume State</label>
+                <select id="resume_status" class="form-control">
+                  <option value="none">Not Started</option>
+                  <option value="in_progress">Draft In Progress</option>
+                  <option value="ready">Completed & Ready to Send</option>
+                </select>
+              </div>
+
+              <div style="display: flex; flex-direction: column; gap: 10px; font-size: 0.88rem; margin-top: 16px;">
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                  <input type="checkbox" id="chk_resume_exists"> 1-Page PDF Resume Draft Exists
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                  <input type="checkbox" id="chk_education_listed"> Education & Degree Clear
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                  <input type="checkbox" id="chk_matching_skills_listed"> Role-Matching Skills Highlighted
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                  <input type="checkbox" id="chk_relevant_project_included"> Relevant Academic/Personal Project Included
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                  <input type="checkbox" id="chk_experience_volunteering"> Extracurricular / Society / Volunteering
+                </label>
+                <label style="display: flex; align-items: center; gap: 8px; cursor: pointer;">
+                  <input type="checkbox" id="chk_contact_portfolio_links"> Contact, GitHub / LinkedIn Link Verifiable
+                </label>
+              </div>
+            </div>
+
+            <!-- Existing Projects Summary -->
+            <div class="card">
+              <h2 class="card-title">My Recorded Projects</h2>
+              <div id="projects-list"></div>
+            </div>
+
+            <!-- Certifications Summary -->
+            <div class="card">
+              <h2 class="card-title">Certifications</h2>
+              <div id="certs-list"></div>
+            </div>
+          </div>
+
+        </div>
+      </main>
+
+      <!-- Footer Disclaimer -->
+      <footer class="footer-disclaimer">
+        InternPath AI gives preparation guidance, not a guarantee of selection. Sample internships are demo data.
+      </footer>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/ui.js"></script>
+  <script src="/js/menu.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/profile.js"></script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Internship Roles – InternPath AI</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="/" class="sidebar-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
+          <span>InternPath <span style="color:#3b82f6;">AI</span></span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="/pages/dashboard.html" class="nav-item">Dashboard</a>
+        <a href="/pages/profile.html" class="nav-item">My Profile</a>
+        <a href="/pages/roles.html" class="nav-item active">Internship Roles</a>
+        <a href="/pages/skill-gap.html" class="nav-item">Skill Gap Analysis</a>
+        <a href="/pages/roadmap.html" class="nav-item">My Roadmap</a>
+        <a href="/pages/learning-hub.html" class="nav-item">Learning Hub</a>
+        <a href="/pages/projects.html" class="nav-item">Projects</a>
+        <a href="/pages/interview.html" class="nav-item">Interview Prep</a>
+        <a href="/pages/progress.html" class="nav-item">My Progress</a>
+        <a href="/pages/readiness.html" class="nav-item">Readiness Score</a>
+        <a href="/pages/internships.html" class="nav-item">Find Internships</a>
+        <a href="/pages/settings.html" class="nav-item">Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button onclick="Auth.logout()" class="btn btn-secondary" style="width:100%; font-size:0.8rem; padding:6px;">Logout</button>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle-btn" id="sidebar-toggle">☰</button>
+          <h1 style="font-size: 1.15rem; font-weight: 600;">Choose Target Internship Role</h1>
+        </div>
+        <div class="topbar-right">
+          <span class="badge-demo">Demo Mode</span>
+          <div class="three-dot-menu-container">
+            <button class="three-dot-btn" id="three-dot-btn" aria-haspopup="true" aria-expanded="false" title="Menu">⋮</button>
+            <div class="dropdown-menu" id="three-dot-dropdown" role="menu">
+              <a href="/pages/dashboard.html" class="dropdown-item">Dashboard</a>
+              <a href="/pages/profile.html" class="dropdown-item">My Profile</a>
+              <a href="/pages/roles.html" class="dropdown-item">Internship Roles</a>
+              <a href="/pages/skill-gap.html" class="dropdown-item">Skill Gap Analysis</a>
+              <a href="/pages/roadmap.html" class="dropdown-item">My Roadmap</a>
+              <a href="/pages/learning-hub.html" class="dropdown-item">Learning Hub</a>
+              <a href="/pages/projects.html" class="dropdown-item">Project Recommendations</a>
+              <a href="/pages/interview.html" class="dropdown-item">Interview Preparation</a>
+              <a href="/pages/progress.html" class="dropdown-item">My Progress</a>
+              <a href="/pages/readiness.html" class="dropdown-item">Internship Readiness</a>
+              <a href="/pages/internships.html" class="dropdown-item">Find Internships</a>
+              <a href="/pages/settings.html" class="dropdown-item">Settings</a>
+              <div class="dropdown-divider"></div>
+              <a href="javascript:void(0)" onclick="Auth.logout()" class="dropdown-item" style="color: #ef4444;">Logout</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-body">
+        <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <div>
+            <h2 style="font-size: 1.4rem; font-weight: 700; color: #0f172a;">12+ Industry Roles</h2>
+            <p style="font-size: 0.9rem; color: #64748b;">Select a role to instantly re-calibrate your skill gaps, customized roadmap, interview bank, and readiness score.</p>
+          </div>
+          <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+            <input type="text" id="search-input" class="form-control" style="width: 220px;" placeholder="Search role or skill...">
+            <select id="category-filter" class="form-control" style="width: 150px;">
+              <option value="all">All Domains</option>
+              <option value="Technical">Technical</option>
+              <option value="Design">Design</option>
+              <option value="Marketing">Marketing</option>
+              <option value="Finance">Finance</option>
+              <option value="Management">Management</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Dynamic Role Cards Grid -->
+        <div id="roles-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;"></div>
+      </main>
+
+      <footer class="footer-disclaimer">
+        InternPath AI gives preparation guidance, not a guarantee of selection. Sample internships are demo data.
+      </footer>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/ui.js"></script>
+  <script src="/js/menu.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/roles.js"></script>
+</body>
+</html>
