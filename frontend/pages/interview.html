@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interview Preparation & Mock Sessions – InternPath AI</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="/" class="sidebar-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
+          <span>InternPath <span style="color:#3b82f6;">AI</span></span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="/pages/dashboard.html" class="nav-item">Dashboard</a>
+        <a href="/pages/profile.html" class="nav-item">My Profile</a>
+        <a href="/pages/roles.html" class="nav-item">Internship Roles</a>
+        <a href="/pages/skill-gap.html" class="nav-item">Skill Gap Analysis</a>
+        <a href="/pages/roadmap.html" class="nav-item">My Roadmap</a>
+        <a href="/pages/learning-hub.html" class="nav-item">Learning Hub</a>
+        <a href="/pages/projects.html" class="nav-item">Projects</a>
+        <a href="/pages/interview.html" class="nav-item active">Interview Prep</a>
+        <a href="/pages/progress.html" class="nav-item">My Progress</a>
+        <a href="/pages/readiness.html" class="nav-item">Readiness Score</a>
+        <a href="/pages/internships.html" class="nav-item">Find Internships</a>
+        <a href="/pages/settings.html" class="nav-item">Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button onclick="Auth.logout()" class="btn btn-secondary" style="width:100%; font-size:0.8rem; padding:6px;">Logout</button>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle-btn" id="sidebar-toggle">☰</button>
+          <h1 style="font-size: 1.15rem; font-weight: 600;">Role-Based Interview Preparation</h1>
+        </div>
+        <div class="topbar-right">
+          <span class="badge-demo">Demo Mode</span>
+          <div class="three-dot-menu-container">
+            <button class="three-dot-btn" id="three-dot-btn" aria-haspopup="true" aria-expanded="false" title="Menu">⋮</button>
+            <div class="dropdown-menu" id="three-dot-dropdown" role="menu">
+              <a href="/pages/dashboard.html" class="dropdown-item">Dashboard</a>
+              <a href="/pages/profile.html" class="dropdown-item">My Profile</a>
+              <a href="/pages/roles.html" class="dropdown-item">Internship Roles</a>
+              <a href="/pages/skill-gap.html" class="dropdown-item">Skill Gap Analysis</a>
+              <a href="/pages/roadmap.html" class="dropdown-item">My Roadmap</a>
+              <a href="/pages/learning-hub.html" class="dropdown-item">Learning Hub</a>
+              <a href="/pages/projects.html" class="dropdown-item">Project Recommendations</a>
+              <a href="/pages/interview.html" class="dropdown-item">Interview Preparation</a>
+              <a href="/pages/progress.html" class="dropdown-item">My Progress</a>
+              <a href="/pages/readiness.html" class="dropdown-item">Internship Readiness</a>
+              <a href="/pages/internships.html" class="dropdown-item">Find Internships</a>
+              <a href="/pages/settings.html" class="dropdown-item">Settings</a>
+              <div class="dropdown-divider"></div>
+              <a href="javascript:void(0)" onclick="Auth.logout()" class="dropdown-item" style="color: #ef4444;">Logout</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <main class="content-body">
+        
+        <!-- Interview Performance Metric Strip -->
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
+          <div class="card" style="margin-bottom: 0; padding: 16px;">
+            <div style="font-size: 0.8rem; color: #64748b;">Total Attempts</div>
+            <div id="stat-total-attempts" style="font-size: 1.6rem; font-weight: 700; color: #0f172a;">0</div>
+          </div>
+          <div class="card" style="margin-bottom: 0; padding: 16px;">
+            <div style="font-size: 0.8rem; color: #64748b;">Practice Accuracy</div>
+            <div id="stat-accuracy" style="font-size: 1.6rem; font-weight: 700; color: #10b981;">0%</div>
+          </div>
+          <div class="card" style="margin-bottom: 0; padding: 16px;">
+            <div style="font-size: 0.8rem; color: #64748b;">Mocks Completed</div>
+            <div id="stat-mocks-done" style="font-size: 1.6rem; font-weight: 700; color: #2563eb;">0</div>
+          </div>
+        </div>
+
+        <!-- Section 1: Simulated Mock Interview Arena -->
+        <div class="card" style="border: 2px solid #e0e7ff; background: #ffffff;">
+          
+          <!-- Mock Setup View -->
+          <div id="mock-setup-card">
+            <h2 class="card-title">Simulate a Real-Time Mock Interview</h2>
+            <p class="card-subtitle">One question at a time with instant keyword and rule-based feedback.</p>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 20px;">
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="mock-role">Interview Role</label>
+                <select id="mock-role" class="form-control">
+                  <option value="python-developer">Python Developer</option>
+                  <option value="finance">Finance Analyst</option>
+                  <option value="web-developer">Web Developer</option>
+                  <option value="all">All Roles (General)</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="mock-category">Category</label>
+                <select id="mock-category" class="form-control">
+                  <option value="all">Technical & Behavioral</option>
+                  <option value="Technical">Technical Only</option>
+                  <option value="HR">HR / Introduction</option>
+                  <option value="Behavioral">Behavioral (STAR)</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="mock-difficulty">Difficulty</label>
+                <select id="mock-difficulty" class="form-control">
+                  <option value="all">All Difficulties</option>
+                  <option value="Basic">Basic</option>
+                  <option value="Intermediate">Intermediate</option>
+                  <option value="Advanced">Advanced</option>
+                </select>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="mock-num">Number of Questions</label>
+                <select id="mock-num" class="form-control">
+                  <option value="5">5 Questions (Quick)</option>
+                  <option value="10">10 Questions (Standard)</option>
+                </select>
+              </div>
+            </div>
+
+            <button type="button" id="start-mock-btn" class="btn btn-primary" style="padding: 10px 24px;">
+              Start Mock Interview
+            </button>
+          </div>
+
+          <!-- Active Question View -->
+          <div id="mock-active-card" style="display: none;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+              <span id="mock-progress-badge" class="badge badge-tech" style="font-size: 0.85rem; padding: 4px 10px;">Question 1 of 5</span>
+              <span id="mock-question-meta" style="font-size: 0.8rem; color: #64748b;">Technical</span>
+            </div>
+
+            <h3 id="mock-question-title" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; color: #0f172a;"></h3>
+
+            <div id="mock-answer-area" style="margin-bottom: 16px;"></div>
+
+            <!-- Inline Feedback Box -->
+            <div id="mock-feedback-box" style="display: none; padding: 14px 16px; border-radius: 8px; margin-bottom: 16px;">
+              <div id="mock-fb-title" style="font-weight: 700; font-size: 0.92rem; margin-bottom: 4px;"></div>
+              <p id="mock-fb-text" style="font-size: 0.85rem; line-height: 1.5; color: #334155;"></p>
+              <div id="mock-fb-label" style="font-size: 0.72rem; color: #64748b; margin-top: 6px; font-style: italic;"></div>
+            </div>
+
+            <div style="display: flex; gap: 12px;">
+              <button type="button" id="mock-submit-btn" class="btn btn-primary">Submit Answer</button>
+              <button type="button" id="mock-next-btn" class="btn btn-primary" style="display: none;">Next Question →</button>
+            </div>
+          </div>
+
+          <!-- Final Results View -->
+          <div id="mock-results-card" style="display: none; text-align: center; padding: 24px 16px;">
+            <div style="font-size: 2.4rem; font-weight: 800; color: #2563eb;" id="res-score">80%</div>
+            <h3 style="font-size: 1.15rem; font-weight: 700; margin: 8px 0;">Mock Interview Completed!</h3>
+            <p id="res-accuracy" style="font-size: 0.9rem; color: #64748b; margin-bottom: 20px;"></p>
+
+            <div style="max-width: 420px; margin: 0 auto 24px; text-align: left; background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
+              <h4 style="font-size: 0.88rem; font-weight: 600; margin-bottom: 8px;">Weak Topics to Revisit:</h4>
+              <ul id="res-weak-topics" style="padding-left: 20px; font-size: 0.85rem; color: #991b1b;"></ul>
+            </div>
+
+            <div style="display: flex; justify-content: center; gap: 12px;">
+              <button type="button" id="mock-retry-btn" class="btn btn-secondary">Retry Mock Interview</button>
+              <a href="/pages/learning-hub.html" class="btn btn-primary">Practice Weak Topics</a>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Section 2: Complete Question Bank -->
+        <div class="card">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+            <div>
+              <h2 class="card-title">Interview Question Bank</h2>
+              <p class="card-subtitle" style="margin-bottom: 0;">Explore comprehensive technical questions and behavioral STAR scenarios.</p>
+            </div>
+            <div style="display: flex; gap: 10px;">
+              <select id="bank-role-filter" class="form-control" style="width: 170px;">
+                <option value="all">All Roles</option>
+                <option value="python-developer">Python Developer</option>
+                <option value="finance">Finance Analyst</option>
+              </select>
+              <select id="bank-cat-filter" class="form-control" style="width: 140px;">
+                <option value="all">All Categories</option>
+                <option value="Technical">Technical</option>
+                <option value="HR">HR</option>
+                <option value="Behavioral">Behavioral</option>
+              </select>
+            </div>
+          </div>
+
+          <div id="qbank-container"></div>
+        </div>
+
+      </main>
+
+      <footer class="footer-disclaimer">
+        InternPath AI gives preparation guidance, not a guarantee of selection. Sample internships are demo data.
+      </footer>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/ui.js"></script>
+  <script src="/js/menu.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/interview.js"></script>
+</body>
+</html>
