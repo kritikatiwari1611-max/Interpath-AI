@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login – InternPath AI</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body style="background-color: #f8fafc; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 20px;">
+
+  <div class="card" style="max-width: 420px; width: 100%; padding: 32px;">
+    <div style="text-align: center; margin-bottom: 24px;">
+      <a href="/" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+          <path d="M6 6h10"/>
+        </svg>
+        <span style="font-size: 1.25rem; font-weight: 700; color: #0f172a;">InternPath <span style="color: #2563eb;">AI</span></span>
+      </a>
+      <h2 style="font-size: 1.3rem; margin-top: 16px; font-weight: 600;">Welcome Back</h2>
+      <p style="font-size: 0.88rem; color: #64748b;">Log in to access your skills roadmap</p>
+    </div>
+
+    <form id="login-form">
+      <div class="form-group">
+        <label class="form-label" for="email">College Email Address</label>
+        <input type="email" id="email" class="form-control" placeholder="name@domain.com" required>
+      </div>
+
+      <div class="form-group">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px;">
+          <label class="form-label" for="password" style="margin-bottom: 0;">Password</label>
+          <button type="button" id="toggle-pw-btn" style="background:none; border:none; color: #2563eb; font-size: 0.78rem; cursor: pointer;">Show</button>
+        </div>
+        <input type="password" id="password" class="form-control" placeholder="Enter your password" required>
+      </div>
+
+      <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; margin-top: 8px; padding: 11px;">
+        Log In
+      </button>
+    </form>
+
+    <div style="margin-top: 20px; font-size: 0.85rem; text-align: center; color: #64748b;">
+      Don't have an account? <a href="/pages/register.html" style="color: #2563eb; font-weight: 500; text-decoration: none;">Create Account</a>
+    </div>
+
+    <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid #e2e8f0; font-size: 0.8rem; color: #64748b;">
+      <p style="font-weight: 600; margin-bottom: 6px;">Quick Fill Demo Logins:</p>
+      <div style="display: flex; gap: 6px; flex-wrap: wrap;">
+        <button type="button" class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.75rem;" onclick="fillDemo('student@demo.com', 'Student@123')">Student (BCA)</button>
+        <button type="button" class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.75rem;" onclick="fillDemo('priya@demo.com', 'Student@123')">Student (Finance)</button>
+        <button type="button" class="btn btn-secondary" style="padding: 4px 8px; font-size: 0.75rem;" onclick="fillDemo('admin@demo.com', 'Admin@123')">Admin</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/ui.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    const form = document.getElementById("login-form");
+    const toggleBtn = document.getElementById("toggle-pw-btn");
+    const pwInput = document.getElementById("password");
+
+    toggleBtn.addEventListener("click", () => {
+      const isPw = pwInput.type === "password";
+      pwInput.type = isPw ? "text" : "password";
+      toggleBtn.textContent = isPw ? "Hide" : "Show";
+    });
+
+    function fillDemo(email, pass) {
+      document.getElementById("email").value = email;
+      document.getElementById("password").value = pass;
+    }
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const btn = document.getElementById("submit-btn");
+
+      btn.disabled = true;
+      btn.textContent = "Logging in...";
+
+      try {
+        const user = await Auth.login(email, password);
+        UI.toast("Welcome back, " + user.name + "!", "success");
+        setTimeout(() => {
+          if (user.role === "admin") {
+            window.location.href = "/pages/admin.html";
+          } else {
+            window.location.href = "/pages/dashboard.html";
+          }
+        }, 600);
+      } catch (err) {
+        UI.toast(err.message, "error");
+        btn.disabled = false;
+        btn.textContent = "Log In";
+      }
+    });
+  </script>
+</body>
+</html>

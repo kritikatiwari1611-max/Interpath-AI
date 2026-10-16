@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Register – InternPath AI</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body style="background-color: #f8fafc; display: flex; align-items: center; justify-content: center; min-height: 100vh; padding: 24px;">
+
+  <div class="card" style="max-width: 480px; width: 100%; padding: 32px;">
+    <div style="text-align: center; margin-bottom: 24px;">
+      <a href="/" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/>
+          <path d="M6 6h10"/>
+        </svg>
+        <span style="font-size: 1.25rem; font-weight: 700; color: #0f172a;">InternPath <span style="color: #2563eb;">AI</span></span>
+      </a>
+      <h2 style="font-size: 1.3rem; margin-top: 16px; font-weight: 600;">Create Student Account</h2>
+      <p style="font-size: 0.88rem; color: #64748b;">Bridge your coursework to high-impact internships</p>
+    </div>
+
+    <form id="register-form">
+      <div class="form-group">
+        <label class="form-label" for="name">Full Name</label>
+        <input type="text" id="name" class="form-control" placeholder="e.g. Aarav Sharma" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">College or Personal Email</label>
+        <input type="email" id="email" class="form-control" placeholder="name@college.edu" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Password (Minimum 6 characters)</label>
+        <input type="password" id="password" class="form-control" placeholder="Create a secure password" minlength="6" required>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="course">Degree / Course</label>
+        <select id="course" class="form-control" required>
+          <option value="">Select your course...</option>
+          <option value="BCA">BCA (Bachelor of Computer Applications)</option>
+          <option value="B.Tech">B.Tech (Computer Science / IT / Eng)</option>
+          <option value="B.Sc">B.Sc (Computer Science / Stats / Maths)</option>
+          <option value="B.Com">B.Com (Commerce / Accounting)</option>
+          <option value="BBA">BBA (Business Administration)</option>
+          <option value="MCA">MCA (Master of Computer Applications)</option>
+          <option value="MBA">MBA (Business / Marketing / Finance)</option>
+          <option value="Other">Other Degree</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="career_goal">Primary Career Aspiration</label>
+        <input type="text" id="career_goal" class="form-control" placeholder="e.g. Become a Backend Developer, Financial Analyst, etc.">
+      </div>
+
+      <button type="submit" id="submit-btn" class="btn btn-primary" style="width: 100%; margin-top: 8px; padding: 11px;">
+        Register & Begin Roadmap
+      </button>
+    </form>
+
+    <div style="margin-top: 20px; font-size: 0.85rem; text-align: center; color: #64748b;">
+      Already have an account? <a href="/pages/login.html" style="color: #2563eb; font-weight: 500; text-decoration: none;">Log In</a>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/ui.js"></script>
+  <script src="/js/auth.js"></script>
+  <script>
+    const form = document.getElementById("register-form");
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const name = document.getElementById("name").value.trim();
+      const email = document.getElementById("email").value.trim();
+      const password = document.getElementById("password").value;
+      const course = document.getElementById("course").value;
+      const career_goal = document.getElementById("career_goal").value.trim();
+      const btn = document.getElementById("submit-btn");
+
+      btn.disabled = true;
+      btn.textContent = "Creating Account...";
+
+      try {
+        const user = await Auth.register({ name, email, password, course, career_goal });
+        UI.toast("Account created successfully! Welcome " + user.name, "success");
+        setTimeout(() => {
+          window.location.href = "/pages/roles.html";
+        }, 600);
+      } catch (err) {
+        UI.toast(err.message, "error");
+        btn.disabled = false;
+        btn.textContent = "Register & Begin Roadmap";
+      }
+    });
+  </script>
+</body>
+</html>
