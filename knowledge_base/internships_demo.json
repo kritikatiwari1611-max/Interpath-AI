@@ -1,0 +1,178 @@
+[
+  {
+    "id": "intern-py-1",
+    "role_id": "python-developer",
+    "organization": "Apex Cloud Systems (Demo)",
+    "title": "Backend Engineering Intern",
+    "location": "Bengaluru (Hybrid)",
+    "duration": "3 Months",
+    "eligibility": "BCA, B.Tech, MCA students with Python & REST API knowledge",
+    "description": "Collaborate with platform engineers to develop internal Flask APIs, database migration scripts, and unit tests.",
+    "required_skills": ["Python", "Flask", "SQL", "Git"]
+  },
+  {
+    "id": "intern-py-2",
+    "role_id": "python-developer",
+    "organization": "Nexar Data Labs (Demo)",
+    "title": "Python & Data Pipeline Intern",
+    "location": "Remote",
+    "duration": "6 Months",
+    "eligibility": "BCA, B.Sc, B.Tech students with Python & SQL fundamentals",
+    "description": "Write automated ETL scripts in Python and assist with database queries and performance optimization.",
+    "required_skills": ["Python", "SQL", "Git", "Data Structures"]
+  },
+  {
+    "id": "intern-py-3",
+    "role_id": "python-developer",
+    "organization": "Quantum FinTech (Demo)",
+    "title": "Junior Python Developer Intern",
+    "location": "Mumbai",
+    "duration": "4 Months",
+    "eligibility": "Final-year students with OOP and backend experience",
+    "description": "Build secured microservices for payment webhook verification and transaction logging.",
+    "required_skills": ["Python", "REST APIs", "SQL", "Authentication & Security"]
+  },
+  {
+    "id": "intern-web-1",
+    "role_id": "web-developer",
+    "organization": "Studio Blue Interactive (Demo)",
+    "title": "Web Development Intern",
+    "location": "Delhi NCR (Hybrid)",
+    "duration": "3 Months",
+    "eligibility": "Any undergraduate/postgraduate with HTML/CSS/JS skills",
+    "description": "Convert Figma design prototypes into semantic, accessible, and responsive client web pages.",
+    "required_skills": ["HTML5", "CSS3", "JavaScript", "Responsive Design"]
+  },
+  {
+    "id": "intern-web-2",
+    "role_id": "web-developer",
+    "organization": "Urban Digital Agency (Demo)",
+    "title": "Junior Frontend & Web Intern",
+    "location": "Remote",
+    "duration": "4 Months",
+    "eligibility": "Students with passion for interactive web apps and Git",
+    "description": "Maintain client storefronts, integrate headless APIs, and optimize Core Web Vitals.",
+    "required_skills": ["JavaScript", "HTML5", "CSS3", "Git", "REST APIs"]
+  },
+  {
+    "id": "intern-fe-1",
+    "role_id": "frontend-developer",
+    "organization": "Nova UI Works (Demo)",
+    "title": "Frontend Engineering Intern",
+    "location": "Hyderabad",
+    "duration": "6 Months",
+    "eligibility": "BCA, B.Tech students with strong vanilla JS & CSS expertise",
+    "description": "Construct high-performance UI components, ensure cross-browser compatibility and responsive styling.",
+    "required_skills": ["JavaScript", "CSS3", "HTML5", "Responsive Design", "Git"]
+  },
+  {
+    "id": "intern-be-1",
+    "role_id": "backend-developer",
+    "organization": "HyperScale Cloud (Demo)",
+    "title": "Backend Systems Intern",
+    "location": "Bengaluru",
+    "duration": "6 Months",
+    "eligibility": "Computer Science / Applications background with DB experience",
+    "description": "Design relational schemas, optimize slow queries, and build authenticated REST endpoints.",
+    "required_skills": ["Python", "SQL", "REST APIs", "Database Design", "Git"]
+  },
+  {
+    "id": "intern-da-1",
+    "role_id": "data-analyst",
+    "organization": "Insight Metrics Corp (Demo)",
+    "title": "Data Analytics Intern",
+    "location": "Pune (Hybrid)",
+    "duration": "3 Months",
+    "eligibility": "BCA, B.Com, B.Sc, BBA students with analytical aptitude",
+    "description": "Clean raw business logs, execute complex SQL aggregations, and publish executive Excel dashboards.",
+    "required_skills": ["SQL", "Excel & Advanced Formulas", "Data Visualization", "Statistics"]
+  },
+  {
+    "id": "intern-ml-1",
+    "role_id": "machine-learning",
+    "organization": "Cognitive AI Labs (Demo)",
+    "title": "Machine Learning Research Intern",
+    "location": "Bengaluru (Hybrid)",
+    "duration": "6 Months",
+    "eligibility": "Students with linear algebra, statistics, and Scikit-Learn foundation",
+    "description": "Perform exploratory data analysis, train baseline regression/classification models, and evaluate F1 scores.",
+    "required_skills": ["Python", "Scikit-Learn", "Pandas", "Mathematics & Linear Algebra", "Data Preprocessing"]
+  },
+  {
+    "id": "intern-ui-1",
+    "role_id": "ui-ux-designer",
+    "organization": "Canvas Creative Studio (Demo)",
+    "title": "Product Design (UI/UX) Intern",
+    "location": "Remote",
+    "duration": "3 Months",
+    "eligibility": "Design portfolio showcasing wireframes and prototype flow",
+    "description": "Conduct usability tests on mobile prototypes and maintain design system tokens in Figma.",
+    "required_skills": ["Figma", "Wireframing & Prototyping", "User Research", "Design Systems"]
+  },
+  {
+    "id": "intern-dm-1",
+    "role_id": "digital-marketing",
+    "organization": "GrowthWave Media (Demo)",
+    "title": "Digital Growth & SEO Intern",
+    "location": "Mumbai (Remote)",
+    "duration": "3 Months",
+    "eligibility": "BBA, B.Com, BA, BCA students with creative communication skills",
+    "description": "Perform keyword research, optimize landing page metadata, and track campaign conversions in Google Analytics.",
+    "required_skills": ["Search Engine Optimization (SEO)", "Content Marketing", "Google Analytics", "Social Media Marketing"]
+  },
+  {
+    "id": "intern-fin-1",
+    "role_id": "finance",
+    "organization": "Beacon Capital Advisors (Demo)",
+    "title": "Financial Analyst Intern",
+    "location": "Mumbai",
+    "duration": "4 Months",
+    "eligibility": "B.Com, BBA, MBA, Economics students with financial accounting foundation",
+    "description": "Build three-statement financial models, assist with comparable valuation multiples, and review earnings transcripts.",
+    "required_skills": ["Financial Modeling", "Excel & Advanced Formulas", "Financial Statement Analysis", "Valuation"]
+  },
+  {
+    "id": "intern-fin-2",
+    "role_id": "finance",
+    "organization": "Vanguard Investment Partners (Demo)",
+    "title": "Corporate Treasury & Equity Research Intern",
+    "location": "Delhi NCR",
+    "duration": "6 Months",
+    "eligibility": "Finance or Commerce students with high Excel proficiency",
+    "description": "Analyze working capital ratios, draft sector performance memos, and calculate cost of capital metrics.",
+    "required_skills": ["Financial Statement Analysis", "Excel & Advanced Formulas", "Corporate Finance", "Ratio Analysis"]
+  },
+  {
+    "id": "intern-ba-1",
+    "role_id": "business-analyst",
+    "organization": "Stride Advisory Group (Demo)",
+    "title": "Business Analyst Intern",
+    "location": "Bengaluru",
+    "duration": "4 Months",
+    "eligibility": "BBA, BCA, B.Tech students with structured problem-solving skills",
+    "description": "Document user journeys, author business requirement specifications, and model workflow swimlanes.",
+    "required_skills": ["Requirement Gathering", "Process Mapping & Flowcharts", "Business Communication", "Excel & Advanced Formulas"]
+  },
+  {
+    "id": "intern-hr-1",
+    "role_id": "human-resources",
+    "organization": "TalentBridge Solutions (Demo)",
+    "title": "Human Resources & Talent Intern",
+    "location": "Pune",
+    "duration": "3 Months",
+    "eligibility": "BBA, B.Com, BA, MBA students interested in people operations",
+    "description": "Screen resumes, coordinate technical interview schedules, and facilitate new hire onboarding checklists.",
+    "required_skills": ["Talent Acquisition & Sourcing", "HR Communication", "Resume Screening", "Employee Onboarding"]
+  },
+  {
+    "id": "intern-java-1",
+    "role_id": "java-developer",
+    "organization": "Summit Enterprise Tech (Demo)",
+    "title": "Core Java Backend Intern",
+    "location": "Chennai",
+    "duration": "6 Months",
+    "eligibility": "BCA, B.Tech, MCA students with strong OOP fundamentals",
+    "description": "Develop Java services, manage JDBC connections, and construct integration tests for enterprise workflows.",
+    "required_skills": ["Java", "OOP Concepts", "SQL", "Git"]
+  }
+]

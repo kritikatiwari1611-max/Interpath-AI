@@ -1,0 +1,37 @@
+[
+  {
+    "id": "cert-py-1",
+    "title": "Python Institute PCAP - Certified Associate in Python Programming",
+    "issuer": "OpenEDG Python Institute",
+    "keywords": ["python", "pcap", "backend python"],
+    "role_id": "python-developer"
+  },
+  {
+    "id": "cert-web-1",
+    "title": "Meta Front-End Developer Professional Certificate",
+    "issuer": "Coursera / Meta",
+    "keywords": ["web development", "javascript", "frontend", "react"],
+    "role_id": "web-developer"
+  },
+  {
+    "id": "cert-fin-1",
+    "title": "FMVA - Financial Modeling & Valuation Analyst",
+    "issuer": "Corporate Finance Institute (CFI)",
+    "keywords": ["financial modeling", "valuation", "cfa", "financial markets"],
+    "role_id": "finance"
+  },
+  {
+    "id": "cert-da-1",
+    "title": "Google Data Analytics Professional Certificate",
+    "issuer": "Google",
+    "keywords": ["data analytics", "sql", "tableau", "google data analytics"],
+    "role_id": "data-analyst"
+  },
+  {
+    "id": "cert-ui-1",
+    "title": "Google UX Design Professional Certificate",
+    "issuer": "Google",
+    "keywords": ["google ux design", "figma", "interaction design"],
+    "role_id": "ui-ux-designer"
+  }
+]

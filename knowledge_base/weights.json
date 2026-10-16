@@ -1,0 +1,32 @@
+{
+  "default_weights": {
+    "skills": 35,
+    "projects": 25,
+    "resume": 15,
+    "interview": 20,
+    "certifications": 5
+  },
+  "role_overrides": {
+    "ui-ux-designer": {
+      "skills": 30,
+      "projects": 35,
+      "resume": 15,
+      "interview": 15,
+      "certifications": 5
+    },
+    "machine-learning": {
+      "skills": 35,
+      "projects": 30,
+      "resume": 10,
+      "interview": 20,
+      "certifications": 5
+    },
+    "finance": {
+      "skills": 35,
+      "projects": 20,
+      "resume": 15,
+      "interview": 20,
+      "certifications": 10
+    }
+  }
+}

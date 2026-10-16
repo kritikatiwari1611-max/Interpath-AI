@@ -1,0 +1,248 @@
+[
+  {
+    "id": "web-developer",
+    "title": "Web Developer",
+    "category": "Technical",
+    "description": "Builds, tests, and deploys responsive, standards-compliant web applications combining frontend styling with backend routing.",
+    "requiredSkills": [
+      {"name": "HTML5", "importance": "core"},
+      {"name": "CSS3", "importance": "core"},
+      {"name": "JavaScript", "importance": "core"},
+      {"name": "Git", "importance": "important"},
+      {"name": "REST APIs", "importance": "important"},
+      {"name": "Responsive Design", "importance": "important"},
+      {"name": "SQL", "importance": "bonus"}
+    ],
+    "projectKeywords": ["website", "portfolio", "ecommerce", "dashboard", "api", "responsive", "web"],
+    "relevantCertificationKeywords": ["web development", "javascript", "fullstack", "frontend"],
+    "resumeExpectations": "Demonstrable live hosted web apps, responsive UI, clean semantic HTML, API consumption.",
+    "learningTopics": ["Semantic HTML", "Modern CSS & Flexbox/Grid", "ES6+ JavaScript", "DOM Manipulation", "REST API integration"],
+    "interviewTopics": ["DOM APIs", "Event Loop", "CSS Box Model", "Async/Await", "HTTP status codes"],
+    "suggestedProjects": ["Personal Portfolio Website", "Interactive Recipe Finder", "Markdown Blog Engine"]
+  },
+  {
+    "id": "frontend-developer",
+    "title": "Frontend Developer",
+    "category": "Technical",
+    "description": "Specializes in client-side interactive experiences, accessible UI components, state management, and modern browser APIs.",
+    "requiredSkills": [
+      {"name": "JavaScript", "importance": "core"},
+      {"name": "CSS3", "importance": "core"},
+      {"name": "HTML5", "importance": "core"},
+      {"name": "Git", "importance": "important"},
+      {"name": "Responsive Design", "importance": "important"},
+      {"name": "Web Accessibility", "importance": "important"},
+      {"name": "Performance Optimization", "importance": "bonus"}
+    ],
+    "projectKeywords": ["ui", "component", "frontend", "spa", "responsive", "client", "animation"],
+    "relevantCertificationKeywords": ["frontend", "javascript", "react", "ui web"],
+    "resumeExpectations": "Component design, CSS architecture, mobile responsiveness, Lighthouse performance scores.",
+    "learningTopics": ["CSS Architecture", "Modern JS (ES6+)", "Browser Storage", "Accessibility (WCAG)", "State Management"],
+    "interviewTopics": ["CSS Specificity", "Event Bubbling & Capturing", "Promises vs Async/Await", "Reflow and Repaint", "Cross-Browser Compatibility"],
+    "suggestedProjects": ["Kanban Task Board", "Interactive E-Commerce Product Page", "Weather Dashboard with Live Forecasts"]
+  },
+  {
+    "id": "backend-developer",
+    "title": "Backend Developer",
+    "category": "Technical",
+    "description": "Designs server architecture, microservices, secure authentication, database schemas, and resilient APIs.",
+    "requiredSkills": [
+      {"name": "Python", "importance": "core"},
+      {"name": "SQL", "importance": "core"},
+      {"name": "REST APIs", "importance": "core"},
+      {"name": "Git", "importance": "important"},
+      {"name": "Database Design", "importance": "important"},
+      {"name": "Authentication & Security", "importance": "important"},
+      {"name": "Docker", "importance": "bonus"}
+    ],
+    "projectKeywords": ["backend", "api", "database", "crud", "server", "authentication", "jwt"],
+    "relevantCertificationKeywords": ["backend", "python", "database", "api design", "cloud"],
+    "resumeExpectations": "Robust CRUD REST APIs, secure token auth, relational normalization, schema indexing.",
+    "learningTopics": ["HTTP Protocol", "Relational Database Normalization", "Authentication Patterns (JWT/Session)", "Error Handling & Logging", "API Testing"],
+    "interviewTopics": ["Database Indexing", "SQL Joins", "REST vs GraphQL", "ACID Properties", "Security Best Practices (SQL Injection, CSRF)"],
+    "suggestedProjects": ["Student Record Management API", "E-Commerce Checkout & Order Backend", "Task Queue API with JWT Auth"]
+  },
+  {
+    "id": "python-developer",
+    "title": "Python Developer",
+    "category": "Technical",
+    "description": "Writes clean, object-oriented and functional Python code for web services, automation scripts, and data workflows.",
+    "requiredSkills": [
+      {"name": "Python", "importance": "core"},
+      {"name": "Data Structures", "importance": "core"},
+      {"name": "SQL", "importance": "core"},
+      {"name": "Flask", "importance": "important"},
+      {"name": "Git", "importance": "important"},
+      {"name": "REST APIs", "importance": "important"},
+      {"name": "Unit Testing", "importance": "bonus"}
+    ],
+    "projectKeywords": ["python", "flask", "django", "automation", "api", "script", "scraping"],
+    "relevantCertificationKeywords": ["python", "pcap", "backend python", "data structures"],
+    "resumeExpectations": "Clean PEP8 Python code, modular architecture, algorithmic problem solving, web framework projects.",
+    "learningTopics": ["Python Data Types & Comprehensions", "OOP in Python", "Flask Web Framework", "SQLAlchemy/SQLite Integration", "Pytest Suite"],
+    "interviewTopics": ["Python GIL", "List Comprehensions vs Generators", "Mutable vs Immutable", "Decorators", "Exception Handling"],
+    "suggestedProjects": ["Student Attendance REST API", "Web Scraper and Excel Report Generator", "CLI Task Manager with SQLite"]
+  },
+  {
+    "id": "java-developer",
+    "title": "Java Developer",
+    "category": "Technical",
+    "description": "Builds enterprise-grade backend systems using Object-Oriented principles, JVM tuning, and robust multithreading.",
+    "requiredSkills": [
+      {"name": "Java", "importance": "core"},
+      {"name": "OOP Concepts", "importance": "core"},
+      {"name": "SQL", "importance": "core"},
+      {"name": "Data Structures", "importance": "important"},
+      {"name": "Git", "importance": "important"},
+      {"name": "REST APIs", "importance": "important"},
+      {"name": "Spring Boot", "importance": "bonus"}
+    ],
+    "projectKeywords": ["java", "spring", "oop", "backend", "enterprise", "crud", "jdbc"],
+    "relevantCertificationKeywords": ["oracle certified java", "java se", "spring framework"],
+    "resumeExpectations": "Clear OOP hierarchies, exception management, JDBC/Hibernate, multithreading basics.",
+    "learningTopics": ["Java Core & Syntax", "OOP (Encapsulation, Polymorphism, Inheritance)", "Collections Framework", "JDBC & SQL Connection", "Maven Build Tool"],
+    "interviewTopics": ["Interface vs Abstract Class", "HashMap Internal Working", "Method Overloading vs Overriding", "Garbage Collection Basics", "Checked vs Unchecked Exceptions"],
+    "suggestedProjects": ["Banking Account Management System", "Hospital Management CLI/Web System", "Inventory Tracking System"]
+  },
+  {
+    "id": "data-analyst",
+    "title": "Data Analyst",
+    "category": "Technical",
+    "description": "Extracts insights from structured data, creates dynamic dashboards, and communicates business metrics with clarity.",
+    "requiredSkills": [
+      {"name": "SQL", "importance": "core"},
+      {"name": "Excel & Advanced Formulas", "importance": "core"},
+      {"name": "Python", "importance": "important"},
+      {"name": "Data Visualization", "importance": "important"},
+      {"name": "Statistics", "importance": "important"},
+      {"name": "Pandas", "importance": "bonus"}
+    ],
+    "projectKeywords": ["dashboard", "analysis", "excel", "powerbi", "tableau", "insights", "sql"],
+    "relevantCertificationKeywords": ["data analytics", "sql for data science", "google data analytics", "power bi"],
+    "resumeExpectations": "Data storytelling, SQL aggregation queries, interactive dashboards, KPI derivation.",
+    "learningTopics": ["Advanced Excel (VLOOKUP, PivotTables)", "SQL Aggregations & Window Functions", "Exploratory Data Analysis", "Tableau/PowerBI Basics", "Descriptive Statistics"],
+    "interviewTopics": ["GROUP BY vs WHERE/HAVING", "Primary Key vs Foreign Key", "Correlation vs Causation", "Handling Null/Missing Values", "Choosing Chart Types"],
+    "suggestedProjects": ["Customer Churn Analysis Dashboard", "Sales Performance & Trend Analysis", "College Placement Statistics Dashboard"]
+  },
+  {
+    "id": "machine-learning",
+    "title": "Machine Learning Engineer",
+    "category": "Technical",
+    "description": "Prepares feature sets, trains predictive models, evaluates precision/recall, and deploys model inference endpoints.",
+    "requiredSkills": [
+      {"name": "Python", "importance": "core"},
+      {"name": "Mathematics & Linear Algebra", "importance": "core"},
+      {"name": "Scikit-Learn", "importance": "core"},
+      {"name": "Pandas", "importance": "important"},
+      {"name": "NumPy", "importance": "important"},
+      {"name": "Data Preprocessing", "importance": "important"},
+      {"name": "Model Evaluation", "importance": "bonus"}
+    ],
+    "projectKeywords": ["machine learning", "ml", "classification", "regression", "prediction", "scikit-learn", "model"],
+    "relevantCertificationKeywords": ["machine learning", "deep learning", "tensorflow", "andrew ng ml"],
+    "resumeExpectations": "End-to-end ML pipeline, feature engineering, cross-validation metrics, model explainability.",
+    "learningTopics": ["Linear Algebra & Matrix Math", "Supervised Learning Algorithms", "Data Scaling & Imputation", "Overfitting vs Underfitting", "Model Deployment Basics"],
+    "interviewTopics": ["Bias-Variance Tradeoff", "Precision vs Recall vs F1", "L1 vs L2 Regularization", "Confusion Matrix Breakdown", "Feature Scaling importance"],
+    "suggestedProjects": ["Student Exam Score Predictor", "House Price Regression Engine", "Spam Email Classifier"]
+  },
+  {
+    "id": "ui-ux-designer",
+    "title": "UI/UX Designer",
+    "category": "Design",
+    "description": "Crafts intuitive user experiences, wireframes, high-fidelity prototypes, user journey maps, and design systems.",
+    "requiredSkills": [
+      {"name": "Figma", "importance": "core"},
+      {"name": "Wireframing & Prototyping", "importance": "core"},
+      {"name": "User Research", "importance": "important"},
+      {"name": "Design Systems", "importance": "important"},
+      {"name": "Typography & Color Theory", "importance": "important"},
+      {"name": "Usability Testing", "importance": "bonus"}
+    ],
+    "projectKeywords": ["figma", "prototype", "wireframe", "redesign", "ux case study", "design system", "mockup"],
+    "relevantCertificationKeywords": ["google ux design", "interaction design", "figma certification"],
+    "resumeExpectations": "Portfolio link with 2+ complete case studies, problem statement, user personas, wireframes, final prototype.",
+    "learningTopics": ["Design Thinking Process", "Figma Components & Auto-Layout", "Information Architecture", "Heuristic Evaluation", "Accessibility in Design"],
+    "interviewTopics": ["User Persona Creation", "Difference between UI and UX", "Conducting Usability Tests", "Design Systems Maintenance", "Handling Stakeholder Feedback"],
+    "suggestedProjects": ["Campus Food Delivery App UX Case Study", "Internship Portal Redesign", "FinTech Mobile App Onboarding Flow"]
+  },
+  {
+    "id": "digital-marketing",
+    "title": "Digital Marketing",
+    "category": "Marketing",
+    "description": "Plans and executes search engine optimization, content campaigns, social media growth, and analytics funnel tracking.",
+    "requiredSkills": [
+      {"name": "Search Engine Optimization (SEO)", "importance": "core"},
+      {"name": "Content Marketing", "importance": "core"},
+      {"name": "Google Analytics", "importance": "important"},
+      {"name": "Social Media Marketing", "importance": "important"},
+      {"name": "Copywriting", "importance": "important"},
+      {"name": "Email Marketing", "importance": "bonus"}
+    ],
+    "projectKeywords": ["seo", "campaign", "social media", "content", "marketing", "analytics", "blog"],
+    "relevantCertificationKeywords": ["google digital garage", "hubspot inbound marketing", "meta certified digital marketing"],
+    "resumeExpectations": "Demonstrated traffic growth, SEO keyword audits, campaign metrics (CTR, impressions, conversion).",
+    "learningTopics": ["On-Page & Off-Page SEO", "Keyword Research Techniques", "Google Analytics 4 Setup", "Ad Campaign Fundamentals", "Content Calendars"],
+    "interviewTopics": ["Organic vs Paid Search", "What is Bounce Rate / Engagement Rate", "Keyword Difficulty and Search Intent", "Social Media ROI Calculation", "A/B Testing Campaigns"],
+    "suggestedProjects": ["College Event SEO & Social Media Campaign", "E-Commerce On-Page SEO Audit Report", "Email Newsletter Funnel Strategy"]
+  },
+  {
+    "id": "finance",
+    "title": "Finance Analyst",
+    "category": "Finance",
+    "description": "Performs financial modeling, statement analysis, valuation metrics, working capital management, and investment appraisals.",
+    "requiredSkills": [
+      {"name": "Financial Modeling", "importance": "core"},
+      {"name": "Excel & Advanced Formulas", "importance": "core"},
+      {"name": "Financial Statement Analysis", "importance": "core"},
+      {"name": "Valuation", "importance": "important"},
+      {"name": "Corporate Finance", "importance": "important"},
+      {"name": "Ratio Analysis", "importance": "bonus"}
+    ],
+    "projectKeywords": ["valuation", "financial model", "dcf", "equity research", "balance sheet", "ratio analysis", "excel"],
+    "relevantCertificationKeywords": ["cfa level 1", "financial markets", "corporate finance institute", "nism"],
+    "resumeExpectations": "Valuation models in Excel, 3-statement linking, sensitivity analysis, equity research summary.",
+    "learningTopics": ["Three Statement Financial Modeling", "Discounted Cash Flow (DCF)", "Liquidity & Solvency Ratios", "Capital Budgeting (NPV/IRR)", "Working Capital Analysis"],
+    "interviewTopics": ["How do 3 financial statements link together?", "Walk me through a DCF valuation", "Impact of $10 depreciation on income and cash flow", "Working Capital calculation", "Enterprise Value vs Equity Value"],
+    "suggestedProjects": ["Equity Research Model of Tech Sector", "Company Valuation using DCF & Comparable Multiples", "Working Capital Optimization Study for Retail"]
+  },
+  {
+    "id": "business-analyst",
+    "title": "Business Analyst",
+    "category": "Management",
+    "description": "Bridges business goals with technical requirements through workflow diagrams, stakeholder interviews, and functional specs.",
+    "requiredSkills": [
+      {"name": "Requirement Gathering", "importance": "core"},
+      {"name": "Process Mapping & Flowcharts", "importance": "core"},
+      {"name": "Business Communication", "importance": "important"},
+      {"name": "SQL", "importance": "important"},
+      {"name": "Excel & Advanced Formulas", "importance": "important"},
+      {"name": "Agile / Scrum Basics", "importance": "bonus"}
+    ],
+    "projectKeywords": ["brd", "flowchart", "process map", "business requirements", "use case", "gap analysis", "stakeholder"],
+    "relevantCertificationKeywords": ["ecba", "business analysis fundamentals", "scrum master"],
+    "resumeExpectations": "Business Requirement Documents (BRD), BPMN workflow diagrams, user stories with acceptance criteria.",
+    "learningTopics": ["Elicitation & Requirement Gathering", "BPMN Process Modeling", "User Story & Acceptance Criteria Writing", "Root Cause Analysis", "Stakeholder Matrix"],
+    "interviewTopics": ["How do you handle scope creep?", "Difference between Functional and Non-Functional Requirements", "Explain a BRD structure", "Agile vs Waterfall pros/cons", "Techniques for stakeholder interviews"],
+    "suggestedProjects": ["Library Management Business Requirement Document (BRD)", "Hospital Patient Flow Optimization Process Map", "E-Commerce Checkout Gap Analysis"]
+  },
+  {
+    "id": "human-resources",
+    "title": "Human Resources",
+    "category": "Management",
+    "description": "Facilitates talent acquisition, candidate screening, onboarding workflows, employee engagement, and workplace policies.",
+    "requiredSkills": [
+      {"name": "Talent Acquisition & Sourcing", "importance": "core"},
+      {"name": "HR Communication", "importance": "core"},
+      {"name": "Resume Screening", "importance": "core"},
+      {"name": "Employee Onboarding", "importance": "important"},
+      {"name": "Labor Law Basics", "importance": "important"},
+      {"name": "Performance Management", "importance": "bonus"}
+    ],
+    "projectKeywords": ["recruitment", "onboarding", "hr policy", "job description", "talent", "employee handbook", "screening"],
+    "relevantCertificationKeywords": ["shrm", "phr", "human resource management", "talent sourcing"],
+    "resumeExpectations": "Recruitment drive planning, structured interview scorecards, employee onboarding checklists.",
+    "learningTopics": ["Recruitment Lifecycle (Sourcing to Hire)", "Structured Interview Techniques (STAR)", "Employee Onboarding Playbooks", "Statutory Compliance Basics", "HR Metrics & Analytics"],
+    "interviewTopics": ["How do you source candidates for hard-to-fill roles?", "STAR interview method evaluation", "Resolving employee conflicts", "Key HR metrics (Time to hire, attrition)", "Crafting an inclusive job description"],
+    "suggestedProjects": ["Campus Recruitment Drive Strategy & Plan", "New Hire 30-60-90 Day Onboarding Playbook", "Company Employee Policy Handbook Draft"]
+  }
+]

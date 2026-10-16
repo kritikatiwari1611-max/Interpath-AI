@@ -1,0 +1,123 @@
+[
+  {
+    "id": "proj-py-1",
+    "role_id": "python-developer",
+    "title": "Student Attendance REST API",
+    "difficulty": "Intermediate",
+    "estimated_time": "15 Hours",
+    "required_skills": ["Python", "Flask", "SQL", "REST APIs"],
+    "description": "Design and build a token-authenticated RESTful API that tracks college course sessions, student attendance, and generates summary attendance reports.",
+    "learning_outcomes": [
+      "Modular Flask application structure",
+      "Relational table design and SQLite foreign keys",
+      "Token-based authorization headers",
+      "Unit testing API endpoints with pytest"
+    ],
+    "milestones": [
+      {"id": "m1", "title": "Schema design and database initialization script"},
+      {"id": "m2", "title": "Implement CRUD endpoints for students and courses"},
+      {"id": "m3", "title": "Implement attendance recording with date filters"},
+      {"id": "m4", "title": "Add automated test suite covering all routes"}
+    ]
+  },
+  {
+    "id": "proj-py-2",
+    "role_id": "python-developer",
+    "title": "Automated Web Scraper & Excel Report Pipeline",
+    "difficulty": "Beginner",
+    "estimated_time": "10 Hours",
+    "required_skills": ["Python", "Git", "REST APIs"],
+    "description": "Scrapes public tech job listings, parses required keywords, and exports a formatted multi-sheet Excel spreadsheet with trend charts.",
+    "learning_outcomes": [
+      "HTTP requests and HTML parsing",
+      "Data formatting and clean error handling",
+      "Automated weekly scheduling script"
+    ],
+    "milestones": [
+      {"id": "m1", "title": "Fetch and parse HTML pages cleanly"},
+      {"id": "m2", "title": "Extract job title, salary range, and tech stack"},
+      {"id": "m3", "title": "Write processed records to Excel file"},
+      {"id": "m4", "title": "Document code in a GitHub repository README"}
+    ]
+  },
+  {
+    "id": "proj-web-1",
+    "role_id": "web-developer",
+    "title": "Interactive Kanban Task Management Board",
+    "difficulty": "Intermediate",
+    "estimated_time": "18 Hours",
+    "required_skills": ["HTML5", "CSS3", "JavaScript", "Responsive Design"],
+    "description": "A responsive Trello-style board with drag-and-drop task movement, local storage state persistence, and tag filtering.",
+    "learning_outcomes": [
+      "HTML5 Drag and Drop API",
+      "DOM event delegation and state sync",
+      "Mobile-responsive CSS Grid & Flexbox"
+    ],
+    "milestones": [
+      {"id": "m1", "title": "Semantic HTML layout with columns (To-Do, Doing, Done)"},
+      {"id": "m2", "title": "Card creation modal with title, tags, and date"},
+      {"id": "m3", "title": "Drag-and-drop event handlers and reordering"},
+      {"id": "m4", "title": "Save board state to browser localStorage"}
+    ]
+  },
+  {
+    "id": "proj-fin-1",
+    "role_id": "finance",
+    "title": "Equity Research Model of Tech Sector",
+    "difficulty": "Intermediate",
+    "estimated_time": "20 Hours",
+    "required_skills": ["Financial Modeling", "Excel & Advanced Formulas", "Valuation", "Financial Statement Analysis"],
+    "description": "Develop a comprehensive 3-statement financial model linking Balance Sheet, P&L, and Cash Flow with Discounted Cash Flow (DCF) valuation.",
+    "learning_outcomes": [
+      "Three-statement integration mechanics",
+      "WACC (Weighted Average Cost of Capital) estimation",
+      "Sensitivity analysis with Excel Data Tables"
+    ],
+    "milestones": [
+      {"id": "m1", "title": "Historical financial data input from annual reports"},
+      {"id": "m2", "title": "Forecast revenue growth, margins, and capex assumptions"},
+      {"id": "m3", "title": "Build dynamic DCF model and terminal value calculation"},
+      {"id": "m4", "title": "Draft 3-page investment thesis executive summary"}
+    ]
+  },
+  {
+    "id": "proj-ui-1",
+    "role_id": "ui-ux-designer",
+    "title": "Campus Food Delivery App UX Case Study",
+    "difficulty": "Intermediate",
+    "estimated_time": "16 Hours",
+    "required_skills": ["Figma", "Wireframing & Prototyping", "User Research", "Design Systems"],
+    "description": "End-to-end design case study addressing long canteen queues: user interviews, personas, journey maps, wireframes, and interactive Figma prototype.",
+    "learning_outcomes": [
+      "User research synthesis and problem definition",
+      "Low to high-fidelity wireframing in Figma",
+      "Interactive micro-animations and clickable prototype"
+    ],
+    "milestones": [
+      {"id": "m1", "title": "User research interviews with 5 students and 2 vendors"},
+      {"id": "m2", "title": "Information architecture and low-fidelity paper wireframes"},
+      {"id": "m3", "title": "Design system setup: typography, colors, component library"},
+      {"id": "m4", "title": "Clickable high-fidelity Figma prototype and testing"}
+    ]
+  },
+  {
+    "id": "proj-ba-1",
+    "role_id": "business-analyst",
+    "title": "Library Management Business Requirement Document (BRD)",
+    "difficulty": "Beginner",
+    "estimated_time": "12 Hours",
+    "required_skills": ["Requirement Gathering", "Process Mapping & Flowcharts", "Business Communication"],
+    "description": "Complete formal Business Requirements Document with BPMN process maps for digital student book reservation and fine tracking.",
+    "learning_outcomes": [
+      "Formal BRD and SRS structuring",
+      "BPMN standard swimlane flowcharts",
+      "User stories with clear acceptance criteria"
+    ],
+    "milestones": [
+      {"id": "m1", "title": "Stakeholder identification and scope definition"},
+      {"id": "m2", "title": "As-Is vs To-Be process workflow mapping"},
+      {"id": "m3", "title": "Draft 10 functional requirements and 5 non-functional requirements"},
+      {"id": "m4", "title": "Final BRD review and sign-off presentation deck"}
+    ]
+  }
+]
