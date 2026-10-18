@@ -130,7 +130,7 @@ function renderInternships(list, disclaimer) {
   footerDiv.className = "step-nav-footer";
   footerDiv.innerHTML = `
     <div>
-      <a href="/pages/readiness.html" class="btn btn-secondary">← Back: Application Score</a>
+      <a href="/pages/application-profile.html" class="btn btn-secondary">← Back: Application Profile</a>
     </div>
     <div>
       <button class="btn btn-primary" onclick="window.location.href='/pages/interview.html'">

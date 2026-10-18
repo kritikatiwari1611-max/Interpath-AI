@@ -45,7 +45,7 @@ function renderReadiness(data) {
     <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 24px;">
       <div>
         <span class="badge badge-tech" style="margin-bottom: 6px;">Target: ${data.role_title}</span>
-        <h2 style="font-size: 1.4rem; font-weight: 700; color: #0f172a; margin: 0 0 6px 0;">Internship Application Score</h2>
+        <h2 style="font-size: 1.4rem; font-weight: 700; color: #0f172a; margin: 0 0 6px 0;">Internship Readiness Score</h2>
         <p style="font-size: 0.88rem; color: #64748b; max-width: 520px; margin: 0;">
           Deterministic calculation based on weighted skills, portfolio projects, resume compliance, interview readiness, and certifications.
         </p>
@@ -86,7 +86,7 @@ function renderReadiness(data) {
     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; flex-wrap:wrap; gap:8px;">
       <div>
         <h3 style="font-size: 1.15rem; font-weight: 700; color: #0f172a; margin:0;">
-          9-Point Application Score Checklist
+          9-Point Internship Readiness Checklist
         </h3>
         <p style="font-size: 0.85rem; color: #64748b; margin: 4px 0 0 0;">
           Tick each milestone to maximize your recruiter competitiveness.
@@ -210,8 +210,8 @@ function renderReadiness(data) {
       <a href="/pages/projects.html" class="btn btn-secondary">← Back: Projects</a>
     </div>
     <div>
-      <button class="btn btn-primary" onclick="window.location.href='/pages/internships.html'">
-        Find Internships →
+      <button class="btn btn-primary" onclick="window.location.href='/pages/application-profile.html'">
+        Continue to Application Profile →
       </button>
     </div>
   `;

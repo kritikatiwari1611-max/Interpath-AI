@@ -43,8 +43,12 @@ async function loadDashboard() {
       nextStepUrl = "/pages/projects.html";
     } else if ((readinessData.overall || 0) < 65) {
       nextStepNum = 5;
-      nextStepTitle = "Application Score";
+      nextStepTitle = "Readiness Score";
       nextStepUrl = "/pages/readiness.html";
+    } else if (!profileData.resume_filename) {
+      nextStepNum = 6;
+      nextStepTitle = "Application Profile";
+      nextStepUrl = "/pages/application-profile.html";
     } else {
       nextStepNum = 6;
       nextStepTitle = "Find Internships";
