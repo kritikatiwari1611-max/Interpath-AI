@@ -142,12 +142,11 @@ const UI = {
       if (isCurrent) nodeClass += " active";
       else if (isCompleted) nodeClass += " completed";
 
-      const circleContent = isCompleted && !isCurrent ? "✓" : stepItem.step;
+      const checkmark = isCompleted && !isCurrent ? `<span class="step-circle">✓</span>` : ``;
 
       const nodeMarkup = `
         <a href="${stepItem.url}" class="${nodeClass}" title="${stepItem.title}">
-          <span class="step-circle">${circleContent}</span>
-          <span>${stepItem.title}</span>
+          ${checkmark}<span>${stepItem.title}</span>
         </a>
       `;
 
