@@ -47,38 +47,56 @@
       </header>
 
 <main class="content-body">
-        <!-- Filter Controls -->
-        <div class="card" style="margin-bottom: 20px; padding: 16px;">
-          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
-            <div style="font-size: 0.9rem; font-weight: 600; color: #334155;">
-              🔍 Filter Roadmap Resources:
-            </div>
-            <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
-              <select id="filter-difficulty" class="form-control" style="width: 150px; font-size: 0.85rem;">
-                <option value="all">All Difficulties</option>
-                <option value="low">Low (Beginner)</option>
-                <option value="medium">Medium (Interm.)</option>
-                <option value="high">High (Advanced)</option>
-              </select>
-
-              <select id="filter-category" class="form-control" style="width: 160px; font-size: 0.85rem;">
-                <option value="all">All Resource Types</option>
-                <option value="video">Videos (YouTube)</option>
-                <option value="docs">Notes & Docs</option>
-                <option value="practice">Practice Questions</option>
-              </select>
-
-              <select id="filter-status" class="form-control" style="width: 140px; font-size: 0.85rem;">
-                <option value="all">All Statuses</option>
-                <option value="pending">Pending</option>
-                <option value="in_progress">In Progress</option>
-                <option value="completed">Completed</option>
-              </select>
-            </div>
-          </div>
+        <!-- Navigation Tabs: Roadmap vs Weekly Study Plan -->
+        <div style="display:flex; gap:12px; margin-bottom:20px; border-bottom:2px solid #e2e8f0; padding-bottom:8px;">
+          <button id="tab-roadmap-btn" class="btn btn-primary" style="padding:8px 18px; font-weight:600; font-size:0.92rem;" onclick="switchRoadmapTab('roadmap')">
+            🗺️ Roadmap & Hub
+          </button>
+          <button id="tab-plan-btn" class="btn btn-secondary" style="padding:8px 18px; font-weight:600; font-size:0.92rem;" onclick="switchRoadmapTab('plan')">
+            📅 Weekly Study Plan
+          </button>
         </div>
 
-        <div id="roadmap-content"></div>
+        <!-- Roadmap View Container -->
+        <div id="roadmap-view-section">
+          <!-- Filter Controls -->
+          <div class="card" style="margin-bottom: 20px; padding: 16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+              <div style="font-size: 0.9rem; font-weight: 600; color: #334155;">
+                🔍 Filter Roadmap Resources:
+              </div>
+              <div style="display:flex; gap:10px; flex-wrap:wrap; align-items:center;">
+                <select id="filter-difficulty" class="form-control" style="width: 150px; font-size: 0.85rem;">
+                  <option value="all">All Difficulties</option>
+                  <option value="low">Low (Beginner)</option>
+                  <option value="medium">Medium (Interm.)</option>
+                  <option value="high">High (Advanced)</option>
+                </select>
+
+                <select id="filter-category" class="form-control" style="width: 160px; font-size: 0.85rem;">
+                  <option value="all">All Resource Types</option>
+                  <option value="video">Videos (YouTube)</option>
+                  <option value="docs">Notes & Docs</option>
+                  <option value="practice">Practice Questions</option>
+                </select>
+
+                <select id="filter-status" class="form-control" style="width: 140px; font-size: 0.85rem;">
+                  <option value="all">All Statuses</option>
+                  <option value="pending">Pending</option>
+                  <option value="in_progress">In Progress</option>
+                  <option value="completed">Completed</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <div id="roadmap-content"></div>
+        </div>
+
+        <!-- Weekly Plan View Container -->
+        <div id="plan-view-section" style="display:none;">
+          <div id="plan-content"></div>
+        </div>
       </main>
 
       <footer class="footer-disclaimer">

@@ -28,7 +28,11 @@ def analyze_skill_gap(role_id: str, user_skills: list) -> dict:
         }
         
     # Label: DICTIONARY DATA STRUCTURE - fast lookup by normalized skill name
-    user_skill_dict = {s["skill_name"].strip().lower(): s.get("level", "Beginner") for s in user_skills}
+    user_skill_dict = {
+        (s.get("skill_name") or s.get("name", "")).strip().lower(): s.get("level", "Beginner")
+        for s in user_skills
+        if (s.get("skill_name") or s.get("name"))
+    }
     # Label: SET DATA STRUCTURE - student acquired skill set
     user_skill_set = set(user_skill_dict.keys())
 

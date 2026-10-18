@@ -139,3 +139,28 @@ CREATE INDEX IF NOT EXISTS idx_roadmap_tasks_user_role ON roadmap_tasks(user_id,
 CREATE INDEX IF NOT EXISTS idx_interview_attempts_user_topic ON interview_attempts(user_id, topic);
 CREATE INDEX IF NOT EXISTS idx_mock_interviews_user_created ON mock_interviews(user_id, created_at);
 CREATE INDEX IF NOT EXISTS idx_readiness_snapshots_user_created ON readiness_snapshots(user_id, created_at);
+
+CREATE TABLE IF NOT EXISTS study_plans (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    role_id TEXT NOT NULL,
+    mode TEXT NOT NULL DEFAULT 'demo',
+    inputs_json TEXT NOT NULL DEFAULT '{}',
+    plan_json TEXT NOT NULL DEFAULT '{}',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE IF NOT EXISTS plan_sessions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    plan_id INTEGER NOT NULL,
+    session_key TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'pending',
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY(plan_id) REFERENCES study_plans(id) ON DELETE CASCADE
+);
+
+CREATE INDEX IF NOT EXISTS idx_plan_sessions_user_plan ON plan_sessions(user_id, plan_id);
+

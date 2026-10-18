@@ -129,16 +129,27 @@ CREATE INDEX IF NOT EXISTS idx_interview_attempts_user_topic ON interview_attemp
 CREATE INDEX IF NOT EXISTS idx_mock_interviews_user_created ON mock_interviews(user_id, created_at);
 CREATE INDEX IF NOT EXISTS idx_readiness_snapshots_user_created ON readiness_snapshots(user_id, created_at);
 
--- Row Level Security (RLS enabled as per requirements, no public policies)
-ALTER TABLE users ENABLE ROW LEVEL SECURITY;
-ALTER TABLE student_profiles ENABLE ROW LEVEL SECURITY;
-ALTER TABLE user_skills ENABLE ROW LEVEL SECURITY;
-ALTER TABLE user_projects ENABLE ROW LEVEL SECURITY;
-ALTER TABLE user_certifications ENABLE ROW LEVEL SECURITY;
-ALTER TABLE roadmap_tasks ENABLE ROW LEVEL SECURITY;
-ALTER TABLE resource_progress ENABLE ROW LEVEL SECURITY;
-ALTER TABLE project_progress ENABLE ROW LEVEL SECURITY;
-ALTER TABLE interview_attempts ENABLE ROW LEVEL SECURITY;
-ALTER TABLE mock_interviews ENABLE ROW LEVEL SECURITY;
-ALTER TABLE readiness_snapshots ENABLE ROW LEVEL SECURITY;
-ALTER TABLE notifications ENABLE ROW LEVEL SECURITY;
+CREATE TABLE IF NOT EXISTS study_plans (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    role_id TEXT NOT NULL,
+    mode TEXT NOT NULL DEFAULT 'demo',
+    inputs_json TEXT NOT NULL DEFAULT '{}',
+    plan_json TEXT NOT NULL DEFAULT '{}',
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS plan_sessions (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+    plan_id INTEGER NOT NULL REFERENCES study_plans(id) ON DELETE CASCADE,
+    session_key TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'pending',
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE INDEX IF NOT EXISTS idx_plan_sessions_user_plan ON plan_sessions(user_id, plan_id);
+
+ALTER TABLE study_plans ENABLE ROW LEVEL SECURITY;
+ALTER TABLE plan_sessions ENABLE ROW LEVEL SECURITY;
+

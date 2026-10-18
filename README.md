@@ -70,7 +70,7 @@ Final Destination: Matched Internships (with "Prepare to Apply" Credentials Veri
 | **Obj 2** | Comprehensive student profile | Course, semester, skills with level, projects, certifications, resume checklist | `frontend/pages/profile.html` |
 | **Obj 3** | Role selection (12+ roles, tech & non-tech) | 12 industry roles in `knowledge_base/roles.json`, dynamic filtering | `backend/services/role_helper.py` |
 | **Obj 4** | Deterministic skill-gap analysis | Importance multipliers (Core=3, Imp=2, Bonus=1) and level scores (0.4, 0.7, 1.0) | `backend/services/skill_gap_service.py` |
-| **Obj 5** | Personalized 4-stage roadmap | Foundation → Practice → Project → Interview derived from missing skills | `backend/services/roadmap_service.py` |
+| **Obj 5** | Personalized 4-stage roadmap & AI Weekly Study Plan | Foundation → Practice → Project → Interview derived from missing skills; collapsible "Why this skill matters" boxes; personalized weekly study plans with hours/week pacing, learning styles, session status tracking, and 100% offline rule-based demo fallback | `backend/services/roadmap_service.py` |
 | **Obj 6** | Learning and Practice Hub | Video tutorials, documentation, and practical exercises with completion toggles | `backend/routes/resources.py` |
 | **Obj 7** | Project recommendations with milestones | Role-matched projects, milestone completion tracking, status management | `backend/routes/projects.py` |
 | **Obj 8** | Interview preparation & AI mock test | Role-tailored questions (no coding for non-tech), 4-criteria rubric evaluation (0–5), server score calculation, model answer accordion, side-by-side comparison, retry with improvement, and weak topic drills | `backend/services/interview_service.py` |

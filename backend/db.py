@@ -90,6 +90,55 @@ def init_db():
             cur.executescript(schema_sql)
             conn.commit()
 
+        # Create study_plans and plan_sessions tables
+        if USE_POSTGRES:
+            cur.execute("""
+                CREATE TABLE IF NOT EXISTS study_plans (
+                    id SERIAL PRIMARY KEY,
+                    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                    role_id TEXT NOT NULL,
+                    mode TEXT NOT NULL DEFAULT 'demo',
+                    inputs_json TEXT NOT NULL DEFAULT '{}',
+                    plan_json TEXT NOT NULL DEFAULT '{}',
+                    created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+                );
+                CREATE TABLE IF NOT EXISTS plan_sessions (
+                    id SERIAL PRIMARY KEY,
+                    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                    plan_id INTEGER NOT NULL REFERENCES study_plans(id) ON DELETE CASCADE,
+                    session_key TEXT NOT NULL,
+                    status TEXT NOT NULL DEFAULT 'pending',
+                    updated_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
+                );
+                CREATE INDEX IF NOT EXISTS idx_plan_sessions_user_plan ON plan_sessions(user_id, plan_id);
+            """)
+            conn.commit()
+        else:
+            cur.executescript("""
+                CREATE TABLE IF NOT EXISTS study_plans (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    role_id TEXT NOT NULL,
+                    mode TEXT NOT NULL DEFAULT 'demo',
+                    inputs_json TEXT NOT NULL DEFAULT '{}',
+                    plan_json TEXT NOT NULL DEFAULT '{}',
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
+                );
+                CREATE TABLE IF NOT EXISTS plan_sessions (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL,
+                    plan_id INTEGER NOT NULL,
+                    session_key TEXT NOT NULL,
+                    status TEXT NOT NULL DEFAULT 'pending',
+                    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                    FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+                    FOREIGN KEY(plan_id) REFERENCES study_plans(id) ON DELETE CASCADE
+                );
+                CREATE INDEX IF NOT EXISTS idx_plan_sessions_user_plan ON plan_sessions(user_id, plan_id);
+            """)
+            conn.commit()
+
         # Seamless migrations for guided flow additions
         migrations = [
             ("student_profiles", "selected_role_id", "TEXT DEFAULT ''"),

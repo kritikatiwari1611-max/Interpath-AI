@@ -18,11 +18,15 @@ All responses are returned as structured JSON:
 * `GET /api/skill-gap`: Returns deterministic skill gap analysis for the user's selected role.
 * `PUT /api/skills`: Replaces user skills. Body: `{ skills: [{ name, level }] }`.
 
-### Roles & Roadmap (`/api`)
+### Roles, Roadmap & AI Weekly Study Plan (`/api`)
 * `GET /api/roles`: Returns all 12+ roles from the knowledge base.
 * `GET /api/roles/<role_id>`: Returns details and prerequisites of a single role.
 * `GET /api/roadmap`: Generates the personalized 4-stage roadmap based on student gaps.
 * `PUT /api/roadmap/tasks/<task_key>`: Updates task status (`pending`, `in_progress`, `completed`).
+* `GET /api/roadmap/skill-explanations`: Returns personalized why-it-matters metadata for current skill gaps (`why_it_matters`, `how_it_is_used_in_role`, `your_starting_point`).
+* `GET /api/roadmap/plan`: Loads active weekly study plan, hydrates resource links, merges session statuses, detects `skills_changed` flag, and computes weekly & overall progress %.
+* `POST /api/roadmap/plan`: Generates and persists a personalized weekly study plan (AI or demo mode). Enforces weekly minute caps, strips unknown resource IDs, excludes MEDIUM/HIGH skills from new learning, carries over completed sessions upon regeneration, and applies 5 regens/day quota. Body: `{ hours_per_week, weeks, learning_style, target_date }`.
+* `PUT /api/roadmap/plan/sessions/<session_key>`: Updates status of a study plan session (`pending`, `in_progress`, `completed`).
 
 ### Learning Hub & Projects (`/api`)
 * `GET /api/resources`: Returns learning resources and domain practice items with completion status.

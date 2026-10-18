@@ -96,3 +96,22 @@
     - Dictionaries (`dict`): Used for O(1) active mock session lookup (`_MOCK_SESSIONS[session_id]`) and rubric criteria scoring breakdown.
     - Lists (`list`): Ordered sequential collection for mock questions, answer history, and structured feedback bullet points (`what_was_good`, `what_was_missing`, `improvement_tips`).
     - Sets (`set`): Used for O(1) membership checking during keyword overlap and sanity checks (e.g., verifying if the student's answer copied the question's unique vocabulary).
+
+31. Q: How does the AI Weekly Study Plan prevent the AI from inventing fake external resource links or tutorials?
+    A: The system strictly restricts resource references to predefined resource IDs from `knowledge_base/resources.json`. The AI is instructed to output only `resource_ids: ["r_012"]`. When the AI returns JSON, the server validates every returned ID against a dictionary map of verified resources (`resource_map = {r["id"]: r}`); any ID not present in the catalog is immediately dropped. All actual URLs, titles, and verification badges are hydrated directly from our verified knowledge base on the server, ensuring zero broken or hallucinated links.
+
+32. Q: Why are study plan weekly minutes and pacing calculated on the server rather than trusted from the AI?
+    A: LLMs struggle with arithmetic accumulation. To guarantee that a student who chooses 10 hours/week never gets scheduled for 25 hours, Python enforces `week_minutes <= hours_per_week * 60`. As the server parses sessions, it accumulates actual minutes and automatically trims excess sessions from the end of the week if they exceed the student's available study capacity.
+
+33. Q: How does the Weekly Study Plan adapt to a student's current skill levels (LOW vs MEDIUM vs HIGH)?
+    A: The backend queries `user_skills` and `analyze_skill_gap()` before planning. Skills already marked MEDIUM or HIGH are excluded from new learning sessions (receiving at most one short revision slot in Week 1). Only Missing and LOW skills are broken down into foundational and practice milestones across the weekly schedule, ensuring students don't waste time re-learning topics they have already mastered.
+
+34. Q: How does regeneration work, and how does the system preserve student progress when their skills change?
+    A: When a student clicks "Regenerate Plan", the server queries `plan_sessions` from their previous plan instance and carries over any completed session statuses. Furthermore, if a student updates their skills in My Profile, the roadmap flags a warning ("Your skills changed. Regenerate your plan?") without destructively overwriting their active schedule until they explicitly confirm.
+
+35. Q: What data structures are used in the roadmap and weekly study plan service, and what are the system's limitations?
+    A: 
+    - Dictionaries (`dict`): O(1) resource catalog indexing (`resource_map = {r["id"]: r}`), user skill dictionary matching, and session status tracking.
+    - Lists (`list`): Sequential progression of roadmap stages, weekly milestones, and session tasks within each week.
+    - Sets (`set`): Fast O(1) membership checks for acquired skills (`known_skills`) to ensure mastered topics are excluded from new learning.
+    - Limitations: Pacing relies on self-reported available study hours and assumed average completion speeds rather than telemetry tracking actual screen time.
