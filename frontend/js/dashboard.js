@@ -14,38 +14,86 @@ async function loadDashboard() {
       API.get("/api/internships")
     ]);
 
-    const profileData = profileRes.data.profile;
-    const readinessData = readinessRes.data;
-    const roadmapData = roadmapRes.data;
-    const progressData = progressRes.data;
+    const profileData = profileRes.data.profile || {};
+    const readinessData = readinessRes.data || {};
+    const roadmapData = roadmapRes.data || {};
+    const progressData = progressRes.data || {};
     const topInternships = (internshipsRes.data.internships || []).slice(0, 3);
 
-    renderDashboard(profileData, readinessData, roadmapData, progressData, topInternships);
+    // Determine next step where user left off
+    let nextStepNum = 1;
+    let nextStepTitle = "Choose Role";
+    let nextStepUrl = "/pages/roles.html";
+
+    if (!profileData.selected_role_id) {
+      nextStepNum = 1;
+      nextStepTitle = "Choose Role";
+      nextStepUrl = "/pages/roles.html";
+    } else if (!profileData.skills || profileData.skills.length === 0) {
+      nextStepNum = 2;
+      nextStepTitle = "Skill Gap Analysis";
+      nextStepUrl = "/pages/skill-gap.html";
+    } else if ((roadmapData.completed_tasks || 0) < 1) {
+      nextStepNum = 3;
+      nextStepTitle = "Roadmap & Learning";
+      nextStepUrl = "/pages/roadmap.html";
+    } else if (!profileData.projects || profileData.projects.length === 0) {
+      nextStepNum = 4;
+      nextStepTitle = "Projects";
+      nextStepUrl = "/pages/projects.html";
+    } else if ((readinessData.overall || 0) < 65) {
+      nextStepNum = 5;
+      nextStepTitle = "Readiness Score";
+      nextStepUrl = "/pages/readiness.html";
+    } else if (!profileData.resume_filename) {
+      nextStepNum = 6;
+      nextStepTitle = "Application Profile";
+      nextStepUrl = "/pages/application-profile.html";
+    } else {
+      nextStepNum = 6;
+      nextStepTitle = "Find Internships";
+      nextStepUrl = "/pages/internships.html";
+    }
+
+    UI.renderStepBar(nextStepNum, profileData);
+
+    renderDashboard(profileData, readinessData, roadmapData, progressData, topInternships, {
+      num: nextStepNum,
+      title: nextStepTitle,
+      url: nextStepUrl
+    });
   } catch (err) {
     UI.toast("Failed to load dashboard: " + err.message, "error");
   }
 }
 
-function renderDashboard(profile, readiness, roadmap, progress, topInternships) {
+function renderDashboard(profile, readiness, roadmap, progress, topInternships, nextStep) {
   const container = document.getElementById("dashboard-content");
 
   container.innerHTML = `
-    <!-- Hero Welcome Banner -->
-    <div class="card" style="background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%); color: #ffffff; padding: 28px;">
-      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-        <div>
+    <!-- Hero Welcome Banner with Continue where you left off -->
+    <div class="card" style="background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%); color: #ffffff; padding: 28px; margin-bottom: 24px;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+        <div style="flex: 1; min-width: 280px;">
           <span style="background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 999px; font-size: 0.8rem; font-weight: 600;">
             ${profile.course || 'Degree Program'} • ${profile.semester || 'Current Semester'}
           </span>
-          <h2 style="font-size: 1.6rem; font-weight: 700; margin-top: 8px;">Welcome back to InternPath AI!</h2>
-          <p style="font-size: 0.95rem; opacity: 0.9; margin-top: 4px;">
+          <h2 style="font-size: 1.6rem; font-weight: 700; margin-top: 10px; color:#ffffff;">
+            Welcome back to InternPath AI!
+          </h2>
+          <p style="font-size: 0.95rem; opacity: 0.9; margin: 4px 0 16px 0;">
             Target Track: <strong>${readiness.role_title || 'No Role Selected'}</strong>
           </p>
+
+          <!-- Continue where you left off button -->
+          <a href="${nextStep.url}" class="btn" style="background:#ffffff; color:#1e3a8a; font-weight:700; padding:10px 22px; font-size:0.92rem; box-shadow:0 4px 12px rgba(0,0,0,0.2); display:inline-flex; align-items:center; gap:8px;">
+            Continue where you left off: Step ${nextStep.num} (${nextStep.title}) →
+          </a>
         </div>
 
-        <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); padding: 16px 24px; border-radius: 12px; text-align: center;">
-          <div style="font-size: 2.2rem; font-weight: 800; line-height: 1;">${readiness.overall}%</div>
-          <span style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.85;">Readiness Score</span>
+        <div style="background: rgba(255,255,255,0.15); backdrop-filter: blur(8px); padding: 20px 28px; border-radius: 12px; text-align: center; min-width: 170px;">
+          <div style="font-size: 2.5rem; font-weight: 800; line-height: 1; color:#ffffff;">${readiness.overall || 0}%</div>
+          <span style="font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.5px; opacity: 0.9; color:#ffffff;">Readiness Score</span>
         </div>
       </div>
     </div>
@@ -59,7 +107,7 @@ function renderDashboard(profile, readiness, roadmap, progress, topInternships) 
         <p class="card-subtitle">Skills to elevate for ${readiness.role_title || 'your role'}</p>
         <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px;">
           <span style="font-size: 1.5rem; font-weight: 700; color: #2563eb;">${readiness.category_scores ? readiness.category_scores.skills : 0}%</span>
-          <span class="badge badge-bonus">${progress.skills_improved} Improved</span>
+          <span class="badge badge-bonus">${progress.skills_improved || 0} Improved</span>
         </div>
         <a href="/pages/skill-gap.html" class="btn btn-outline" style="width: 100%; font-size: 0.82rem; padding: 6px;">View Skill Gap Analysis →</a>
       </div>
@@ -91,7 +139,7 @@ function renderDashboard(profile, readiness, roadmap, progress, topInternships) 
 
     </div>
 
-    <!-- Matched Internships Carousel / List Preview -->
+    <!-- Matched Internships Preview -->
     <div class="card">
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
         <div>

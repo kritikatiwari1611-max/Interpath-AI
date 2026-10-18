@@ -28,6 +28,7 @@ def get_skill_gap():
     return jsonify({"ok": True, "data": gap_result})
 
 @skillgap_bp.route("/skills", methods=["PUT"])
+@skillgap_bp.route("/skill-gap/skills", methods=["PUT"])
 @login_required
 def update_skills():
     """Batch updates or replaces student skills."""

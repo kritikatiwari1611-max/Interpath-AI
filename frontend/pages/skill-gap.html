@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Skill Gap Analysis – InternPath AI</title>
+  <title>Step 2: Skill Gap Analyzer – InternPath AI</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -19,15 +19,15 @@
       <nav class="sidebar-nav">
         <a href="/pages/dashboard.html" class="nav-item">Dashboard</a>
         <a href="/pages/profile.html" class="nav-item">My Profile</a>
-        <a href="/pages/roles.html" class="nav-item">Internship Roles</a>
-        <a href="/pages/skill-gap.html" class="nav-item active">Skill Gap Analysis</a>
-        <a href="/pages/roadmap.html" class="nav-item">My Roadmap</a>
-        <a href="/pages/learning-hub.html" class="nav-item">Learning Hub</a>
-        <a href="/pages/projects.html" class="nav-item">Projects</a>
+        <a href="/pages/roles.html" class="nav-item">1. Choose Role</a>
+        <a href="/pages/skill-gap.html" class="nav-item active">2. Skill Gap Analysis</a>
+        <a href="/pages/roadmap.html" class="nav-item">3. My Roadmap</a>
+        <a href="/pages/projects.html" class="nav-item">4. Projects</a>
+        <a href="/pages/readiness.html" class="nav-item">5. Readiness Score</a>
+        <a href="/pages/application-profile.html" class="nav-item">6. Application Profile</a>
+        <a href="/pages/internships.html" class="nav-item">Find Internships</a>
         <a href="/pages/interview.html" class="nav-item">Interview Prep</a>
         <a href="/pages/progress.html" class="nav-item">My Progress</a>
-        <a href="/pages/readiness.html" class="nav-item">Readiness Score</a>
-        <a href="/pages/internships.html" class="nav-item">Find Internships</a>
         <a href="/pages/settings.html" class="nav-item">Settings</a>
       </nav>
       <div class="sidebar-footer">
@@ -39,7 +39,7 @@
       <header class="topbar">
         <div class="topbar-left">
           <button class="menu-toggle-btn" id="sidebar-toggle">☰</button>
-          <h1 style="font-size: 1.15rem; font-weight: 600;">Deterministic Skill Gap Engine</h1>
+          <h1 style="font-size: 1.15rem; font-weight: 600;">Step 2: Skill Gap Analyzer & Selection</h1>
         </div>
         <div class="topbar-right">
           <span class="badge-demo">Demo Mode</span>
@@ -48,15 +48,15 @@
             <div class="dropdown-menu" id="three-dot-dropdown" role="menu">
               <a href="/pages/dashboard.html" class="dropdown-item">Dashboard</a>
               <a href="/pages/profile.html" class="dropdown-item">My Profile</a>
-              <a href="/pages/roles.html" class="dropdown-item">Internship Roles</a>
-              <a href="/pages/skill-gap.html" class="dropdown-item">Skill Gap Analysis</a>
-              <a href="/pages/roadmap.html" class="dropdown-item">My Roadmap</a>
-              <a href="/pages/learning-hub.html" class="dropdown-item">Learning Hub</a>
-              <a href="/pages/projects.html" class="dropdown-item">Project Recommendations</a>
+              <a href="/pages/roles.html" class="dropdown-item">1. Choose Role</a>
+              <a href="/pages/skill-gap.html" class="dropdown-item">2. Skill Gap Analysis</a>
+              <a href="/pages/roadmap.html" class="dropdown-item">3. My Roadmap</a>
+              <a href="/pages/projects.html" class="dropdown-item">4. Project Recommendations</a>
+              <a href="/pages/readiness.html" class="dropdown-item">5. Internship Readiness</a>
+              <a href="/pages/application-profile.html" class="dropdown-item">6. Application Profile</a>
+              <a href="/pages/internships.html" class="dropdown-item">Find Internships</a>
               <a href="/pages/interview.html" class="dropdown-item">Interview Preparation</a>
               <a href="/pages/progress.html" class="dropdown-item">My Progress</a>
-              <a href="/pages/readiness.html" class="dropdown-item">Internship Readiness</a>
-              <a href="/pages/internships.html" class="dropdown-item">Find Internships</a>
               <a href="/pages/settings.html" class="dropdown-item">Settings</a>
               <div class="dropdown-divider"></div>
               <a href="javascript:void(0)" onclick="Auth.logout()" class="dropdown-item" style="color: #ef4444;">Logout</a>
@@ -64,6 +64,9 @@
           </div>
         </div>
       </header>
+
+      <!-- Guided Step Bar Container -->
+      <div id="step-bar-container"></div>
 
       <main class="content-body" id="skillgap-content"></main>
 

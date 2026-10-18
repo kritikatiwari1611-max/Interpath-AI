@@ -1,8 +1,9 @@
 import json
 from pathlib import Path
-from backend.config import KNOWLEDGE_BASE_DIR
+from backend.config import KNOWLEDGE_BASE_DIR, READINESS_APPLY_THRESHOLD
 
 _WEIGHTS_CACHE = {}
+
 
 def get_weights(role_id: str = None) -> dict:
     """Returns scoring weights, applying per-role overrides if defined."""
@@ -49,6 +50,9 @@ def calculate_readiness_score(
             "overall": 0,
             "category_scores": {},
             "weights": get_weights(),
+            "is_ready_to_apply": False,
+            "apply_threshold": READINESS_APPLY_THRESHOLD,
+            "application_status_message": f"Not ready to apply yet. We recommend reaching at least {READINESS_APPLY_THRESHOLD}% by finishing priority roadmap skills and at least one project.",
             "reasons": ["No internship role currently selected."],
             "next_actions": ["Select a target role on the Internship Roles page to unlock your analysis."]
         }
@@ -66,6 +70,9 @@ def calculate_readiness_score(
                 "certifications": 0
             },
             "weights": get_weights(role_id),
+            "is_ready_to_apply": False,
+            "apply_threshold": READINESS_APPLY_THRESHOLD,
+            "application_status_message": f"Not ready to apply yet. We recommend reaching at least {READINESS_APPLY_THRESHOLD}% by finishing priority roadmap skills and at least one project.",
             "reasons": ["Profile is incomplete: no skills or projects added yet."],
             "next_actions": [
                 "Add your current skills in My Profile.",
@@ -174,9 +181,19 @@ def calculate_readiness_score(
     if not next_actions:
         next_actions.append("Your readiness is stellar! Review your Matched Internships and apply with confidence.")
 
+    # Apply readiness guidance based on config threshold
+    is_ready_to_apply = (overall_score >= READINESS_APPLY_THRESHOLD and not provisional)
+    if is_ready_to_apply:
+        application_status_message = "You are ready to apply! Your skills and portfolio meet competitive benchmark requirements."
+    else:
+        application_status_message = f"Keep improving! Target at least {READINESS_APPLY_THRESHOLD}% readiness before submitting internship applications."
+
     return {
         "provisional": provisional,
         "overall": overall_score,
+        "is_ready_to_apply": is_ready_to_apply,
+        "apply_threshold": READINESS_APPLY_THRESHOLD,
+        "application_status_message": application_status_message,
         "role_id": role_id,
         "role_title": role_meta.get("title"),
         "category_scores": {
@@ -192,3 +209,4 @@ def calculate_readiness_score(
         "next_actions": next_actions,
         "disclaimer": "This score estimates preparation. It does not guarantee selection."
     }
+

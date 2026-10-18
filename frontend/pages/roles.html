@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Internship Roles – InternPath AI</title>
+  <title>Step 1: Choose Role – InternPath AI</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -19,15 +19,15 @@
       <nav class="sidebar-nav">
         <a href="/pages/dashboard.html" class="nav-item">Dashboard</a>
         <a href="/pages/profile.html" class="nav-item">My Profile</a>
-        <a href="/pages/roles.html" class="nav-item active">Internship Roles</a>
-        <a href="/pages/skill-gap.html" class="nav-item">Skill Gap Analysis</a>
-        <a href="/pages/roadmap.html" class="nav-item">My Roadmap</a>
-        <a href="/pages/learning-hub.html" class="nav-item">Learning Hub</a>
-        <a href="/pages/projects.html" class="nav-item">Projects</a>
+        <a href="/pages/roles.html" class="nav-item active">1. Choose Role</a>
+        <a href="/pages/skill-gap.html" class="nav-item">2. Skill Gap Analysis</a>
+        <a href="/pages/roadmap.html" class="nav-item">3. My Roadmap</a>
+        <a href="/pages/projects.html" class="nav-item">4. Projects</a>
+        <a href="/pages/readiness.html" class="nav-item">5. Readiness Score</a>
+        <a href="/pages/application-profile.html" class="nav-item">6. Application Profile</a>
+        <a href="/pages/internships.html" class="nav-item">Find Internships</a>
         <a href="/pages/interview.html" class="nav-item">Interview Prep</a>
         <a href="/pages/progress.html" class="nav-item">My Progress</a>
-        <a href="/pages/readiness.html" class="nav-item">Readiness Score</a>
-        <a href="/pages/internships.html" class="nav-item">Find Internships</a>
         <a href="/pages/settings.html" class="nav-item">Settings</a>
       </nav>
       <div class="sidebar-footer">
@@ -39,7 +39,7 @@
       <header class="topbar">
         <div class="topbar-left">
           <button class="menu-toggle-btn" id="sidebar-toggle">☰</button>
-          <h1 style="font-size: 1.15rem; font-weight: 600;">Choose Target Internship Role</h1>
+          <h1 style="font-size: 1.15rem; font-weight: 600;">Step 1: Choose Target Internship Role</h1>
         </div>
         <div class="topbar-right">
           <span class="badge-demo">Demo Mode</span>
@@ -48,15 +48,15 @@
             <div class="dropdown-menu" id="three-dot-dropdown" role="menu">
               <a href="/pages/dashboard.html" class="dropdown-item">Dashboard</a>
               <a href="/pages/profile.html" class="dropdown-item">My Profile</a>
-              <a href="/pages/roles.html" class="dropdown-item">Internship Roles</a>
-              <a href="/pages/skill-gap.html" class="dropdown-item">Skill Gap Analysis</a>
-              <a href="/pages/roadmap.html" class="dropdown-item">My Roadmap</a>
-              <a href="/pages/learning-hub.html" class="dropdown-item">Learning Hub</a>
-              <a href="/pages/projects.html" class="dropdown-item">Project Recommendations</a>
+              <a href="/pages/roles.html" class="dropdown-item">1. Choose Role</a>
+              <a href="/pages/skill-gap.html" class="dropdown-item">2. Skill Gap Analysis</a>
+              <a href="/pages/roadmap.html" class="dropdown-item">3. My Roadmap</a>
+              <a href="/pages/projects.html" class="dropdown-item">4. Project Recommendations</a>
+              <a href="/pages/readiness.html" class="dropdown-item">5. Internship Readiness</a>
+              <a href="/pages/application-profile.html" class="dropdown-item">6. Application Profile</a>
+              <a href="/pages/internships.html" class="dropdown-item">Find Internships</a>
               <a href="/pages/interview.html" class="dropdown-item">Interview Preparation</a>
               <a href="/pages/progress.html" class="dropdown-item">My Progress</a>
-              <a href="/pages/readiness.html" class="dropdown-item">Internship Readiness</a>
-              <a href="/pages/internships.html" class="dropdown-item">Find Internships</a>
               <a href="/pages/settings.html" class="dropdown-item">Settings</a>
               <div class="dropdown-divider"></div>
               <a href="javascript:void(0)" onclick="Auth.logout()" class="dropdown-item" style="color: #ef4444;">Logout</a>
@@ -65,11 +65,14 @@
         </div>
       </header>
 
+      <!-- Guided Step Bar Container -->
+      <div id="step-bar-container"></div>
+
       <main class="content-body">
         <div style="margin-bottom: 24px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
           <div>
-            <h2 style="font-size: 1.4rem; font-weight: 700; color: #0f172a;">12+ Industry Roles</h2>
-            <p style="font-size: 0.9rem; color: #64748b;">Select a role to instantly re-calibrate your skill gaps, customized roadmap, interview bank, and readiness score.</p>
+            <h2 style="font-size: 1.4rem; font-weight: 700; color: #0f172a;">Select Your Target Career Role</h2>
+            <p style="font-size: 0.9rem; color: #64748b;">Pick the internship role you want to prepare for. Your skill gaps, roadmap stages, and projects will adapt automatically.</p>
           </div>
           <div style="display: flex; gap: 12px; flex-wrap: wrap;">
             <input type="text" id="search-input" class="form-control" style="width: 220px;" placeholder="Search role or skill...">
@@ -84,13 +87,53 @@
           </div>
         </div>
 
+        <!-- Selected Role Sticky Action Banner -->
+        <div id="selected-role-banner" class="card" style="margin-bottom: 24px; background: #eff6ff; border-color: #bfdbfe; display: none;">
+          <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+            <div>
+              <span class="badge badge-bonus" style="margin-bottom: 4px;">Current Selection</span>
+              <h3 id="banner-role-title" style="font-size: 1.15rem; font-weight: 700; color: #1e3a8a; margin: 0;"></h3>
+              <p id="banner-role-desc" style="font-size: 0.85rem; color: #3b82f6; margin: 4px 0 0 0;"></p>
+            </div>
+            <button id="continue-skill-gap-btn" class="btn btn-primary" style="padding: 10px 20px; font-weight: 600;">
+              Continue to Skill Gap Analysis →
+            </button>
+          </div>
+        </div>
+
         <!-- Dynamic Role Cards Grid -->
         <div id="roles-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;"></div>
+
+        <!-- Flow Navigation Footer -->
+        <div id="roles-step-footer" class="step-nav-footer">
+          <div>
+            <a href="/pages/dashboard.html" class="btn btn-secondary">← Back to Dashboard</a>
+          </div>
+          <div>
+            <button id="footer-continue-btn" class="btn btn-primary" disabled>
+              Continue to Skill Gap Analysis →
+            </button>
+          </div>
+        </div>
       </main>
 
       <footer class="footer-disclaimer">
         InternPath AI gives preparation guidance, not a guarantee of selection. Sample internships are demo data.
       </footer>
+    </div>
+  </div>
+
+  <!-- Role Change Confirmation Modal -->
+  <div id="role-confirm-modal" class="modal-overlay" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+    <div class="card" style="max-width: 480px; width: 90%; background: #ffffff; padding: 24px;">
+      <h3 style="font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-bottom: 12px;">Confirm Target Role Change</h3>
+      <p style="font-size: 0.9rem; color: #475569; line-height: 1.5; margin-bottom: 20px;">
+        Changing your target role will re-calibrate your skill gap analysis, personalized roadmap, project recommendations, interview questions, and readiness score. Your saved skills and custom projects will be kept.
+      </p>
+      <div style="display:flex; justify-content:flex-end; gap:12px;">
+        <button id="cancel-change-btn" class="btn btn-secondary">Cancel</button>
+        <button id="confirm-change-btn" class="btn btn-primary">Yes, Change Role</button>
+      </div>
     </div>
   </div>
 

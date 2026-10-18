@@ -1,4 +1,13 @@
-// UI helpers: notifications, safe text escaping, loading skeletons, and modal management
+// UI helpers: notifications, safe text escaping, loading skeletons, step bar, and flow navigation
+
+const GUIDED_STEPS = [
+  { step: 1, title: "Choose Role", url: "/pages/roles.html" },
+  { step: 2, title: "Skill Gap", url: "/pages/skill-gap.html" },
+  { step: 3, title: "Roadmap & Learning", url: "/pages/roadmap.html" },
+  { step: 4, title: "Projects", url: "/pages/projects.html" },
+  { step: 5, title: "Readiness Score", url: "/pages/readiness.html" },
+  { step: 6, title: "Application Profile", url: "/pages/application-profile.html" }
+];
 
 const UI = {
   // Always render user and dynamic text safely with textContent (avoiding innerHTML vulnerabilities)
@@ -63,5 +72,119 @@ const UI = {
         <p style="font-size: 0.9rem;">${message}</p>
       </div>
     `;
+  },
+
+  // Check URL query parameters for polite redirect messages
+  checkUrlMessages() {
+    const params = new URLSearchParams(window.location.search);
+    const msg = params.get("msg");
+    if (msg === "role_required") {
+      UI.toast("Please choose a target role first before proceeding.", "warning");
+    } else if (msg === "skills_required") {
+      UI.toast("Please analyze your skills first to generate your roadmap.", "warning");
+    } else if (msg === "profile_updated") {
+      UI.toast("Application profile updated successfully!", "success");
+    }
+  },
+
+  // Check whether the student meets prerequisites for a given step; redirect politely if not
+  checkPrerequisites(currentStepNum, profile) {
+    if (!profile) return true;
+    if (currentStepNum > 1 && !profile.selected_role_id) {
+      window.location.href = "/pages/roles.html?msg=role_required";
+      return false;
+    }
+    if (currentStepNum > 2 && (!profile.skills || profile.skills.length === 0)) {
+      window.location.href = "/pages/skill-gap.html?msg=skills_required";
+      return false;
+    }
+    return true;
+  },
+
+  // Render the step progress bar ("Step X of 6: Title") with ticked completed steps
+  renderStepBar(currentStepNum, profile = null) {
+    let wrapper = document.getElementById("step-bar-container");
+    if (!wrapper) {
+      // Find where to insert: below topbar, before content-body
+      const topbar = document.querySelector(".topbar");
+      if (topbar && topbar.parentNode) {
+        wrapper = document.createElement("div");
+        wrapper.id = "step-bar-container";
+        wrapper.className = "step-bar-wrapper";
+        topbar.parentNode.insertBefore(wrapper, topbar.nextSibling);
+      } else {
+        return;
+      }
+    }
+
+    const currentStepObj = GUIDED_STEPS.find(s => s.step === currentStepNum) || GUIDED_STEPS[0];
+
+    // Determine completion for each step
+    const hasRole = Boolean(profile && profile.selected_role_id);
+    const hasSkills = Boolean(profile && profile.skills && profile.skills.length > 0);
+    const hasProjects = Boolean(profile && profile.projects && profile.projects.length > 0);
+    const hasApplication = Boolean(profile && (profile.resume_filename || (profile.linkedin_link && profile.portfolio_link)));
+
+    const stepsHtml = GUIDED_STEPS.map((stepItem, idx) => {
+      const isCurrent = stepItem.step === currentStepNum;
+      
+      // Step completion heuristic
+      let isCompleted = false;
+      if (stepItem.step === 1 && hasRole) isCompleted = true;
+      if (stepItem.step === 2 && hasSkills) isCompleted = true;
+      if (stepItem.step === 3 && hasSkills) isCompleted = true; // Roadmap generated
+      if (stepItem.step === 4 && hasProjects) isCompleted = true;
+      if (stepItem.step === 5 && hasRole && hasSkills) isCompleted = true;
+      if (stepItem.step === 6 && hasApplication) isCompleted = true;
+
+      // Completed earlier steps are clickable; current is active
+      let nodeClass = "step-node";
+      if (isCurrent) nodeClass += " active";
+      else if (isCompleted) nodeClass += " completed";
+
+      const circleContent = isCompleted && !isCurrent ? "✓" : stepItem.step;
+
+      const nodeMarkup = `
+        <a href="${stepItem.url}" class="${nodeClass}" title="${stepItem.title}">
+          <span class="step-circle">${circleContent}</span>
+          <span>${stepItem.step}. ${stepItem.title}</span>
+        </a>
+      `;
+
+      const separator = idx < GUIDED_STEPS.length - 1 ? `<span class="step-separator">›</span>` : "";
+      return nodeMarkup + separator;
+    }).join("");
+
+    wrapper.innerHTML = `
+      <div style="max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
+        <span style="font-size: 0.85rem; font-weight: 700; color: #1e293b; text-transform: uppercase; letter-spacing: 0.5px;">
+          Step ${currentStepNum} of ${GUIDED_STEPS.length}: <span style="color: #2563eb;">${currentStepObj.title}</span>
+        </span>
+        <span style="font-size: 0.8rem; color: #64748b;">Guided Internship Path</span>
+      </div>
+      <div class="step-bar">
+        ${stepsHtml}
+      </div>
+    `;
+  },
+
+  // Helper to render standard Back / Next footer buttons
+  renderStepFooter(containerId, prevUrl, prevLabel, nextUrl, nextLabel) {
+    const container = document.getElementById(containerId);
+    if (!container) return;
+    container.className = "step-nav-footer";
+    container.innerHTML = `
+      <div>
+        ${prevUrl ? `<a href="${prevUrl}" class="btn btn-secondary">← Back: ${prevLabel}</a>` : ''}
+      </div>
+      <div>
+        ${nextUrl ? `<a href="${nextUrl}" class="btn btn-primary" id="step-next-btn">${nextLabel} →</a>` : ''}
+      </div>
+    `;
   }
 };
+
+// Auto check for URL notifications on load
+document.addEventListener("DOMContentLoaded", () => {
+  UI.checkUrlMessages();
+});

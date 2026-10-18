@@ -85,13 +85,23 @@
       try {
         const user = await Auth.login(email, password);
         UI.toast("Welcome back, " + user.name + "!", "success");
-        setTimeout(() => {
+        setTimeout(async () => {
           if (user.role === "admin") {
             window.location.href = "/pages/admin.html";
           } else {
+            try {
+              const profRes = await API.get("/api/profile");
+              const hasRole = profRes && profRes.data && profRes.data.profile && profRes.data.profile.selected_role_id;
+              if (!hasRole) {
+                window.location.href = "/pages/roles.html";
+                return;
+              }
+            } catch (e) {
+              // Ignore and go to dashboard
+            }
             window.location.href = "/pages/dashboard.html";
           }
-        }, 600);
+        }, 500);
       } catch (err) {
         UI.toast(err.message, "error");
         btn.disabled = false;

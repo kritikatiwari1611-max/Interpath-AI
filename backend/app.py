@@ -95,4 +95,13 @@ def create_app():
     def serve_sw():
         return send_from_directory(str(FRONTEND_DIR), "sw.js")
 
+    @app.route("/api/uploads/<path:filename>")
+    def serve_user_upload(filename):
+        user_id = session.get("user_id")
+        if not user_id:
+            return jsonify({"ok": False, "error": "Unauthorized"}), 401
+        from backend.config import UPLOADS_DIR
+        user_folder = UPLOADS_DIR / str(user_id)
+        return send_from_directory(str(user_folder), filename)
+
     return app

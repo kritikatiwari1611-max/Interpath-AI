@@ -89,5 +89,29 @@ def init_db():
         else:
             cur.executescript(schema_sql)
             conn.commit()
+
+        # Seamless migrations for guided flow additions
+        migrations = [
+            ("student_profiles", "linkedin_link", "TEXT DEFAULT ''"),
+            ("student_profiles", "portfolio_link", "TEXT DEFAULT ''"),
+            ("student_profiles", "resume_filename", "TEXT DEFAULT ''"),
+            ("student_profiles", "resume_original_name", "TEXT DEFAULT ''"),
+            ("user_projects", "github_link", "TEXT DEFAULT ''"),
+            ("user_projects", "demo_link", "TEXT DEFAULT ''"),
+            ("user_projects", "report_filename", "TEXT DEFAULT ''"),
+            ("user_projects", "report_original_name", "TEXT DEFAULT ''"),
+            ("resource_progress", "status", "TEXT DEFAULT 'pending'")
+        ]
+        for tbl, col, col_def in migrations:
+            try:
+                if USE_POSTGRES:
+                    cur.execute(f"ALTER TABLE {tbl} ADD COLUMN IF NOT EXISTS {col} {col_def};")
+                else:
+                    cur.execute(f"ALTER TABLE {tbl} ADD COLUMN {col} {col_def};")
+                conn.commit()
+            except Exception:
+                # Column already exists
+                pass
     finally:
         conn.close()
+

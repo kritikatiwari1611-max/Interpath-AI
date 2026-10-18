@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Step 6: Application Profile – InternPath AI</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+
+  <div class="app-container">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-header">
+        <a href="/" class="sidebar-logo">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1-2.5-2.5Z"/></svg>
+          <span>InternPath <span style="color:#3b82f6;">AI</span></span>
+        </a>
+      </div>
+      <nav class="sidebar-nav">
+        <a href="/pages/dashboard.html" class="nav-item">Dashboard</a>
+        <a href="/pages/profile.html" class="nav-item">My Profile</a>
+        <a href="/pages/roles.html" class="nav-item">1. Choose Role</a>
+        <a href="/pages/skill-gap.html" class="nav-item">2. Skill Gap Analysis</a>
+        <a href="/pages/roadmap.html" class="nav-item">3. My Roadmap</a>
+        <a href="/pages/projects.html" class="nav-item">4. Projects</a>
+        <a href="/pages/readiness.html" class="nav-item">5. Readiness Score</a>
+        <a href="/pages/application-profile.html" class="nav-item active">6. Application Profile</a>
+        <a href="/pages/internships.html" class="nav-item">Find Internships</a>
+        <a href="/pages/interview.html" class="nav-item">Interview Prep</a>
+        <a href="/pages/progress.html" class="nav-item">My Progress</a>
+        <a href="/pages/settings.html" class="nav-item">Settings</a>
+      </nav>
+      <div class="sidebar-footer">
+        <button onclick="Auth.logout()" class="btn btn-secondary" style="width:100%; font-size:0.8rem; padding:6px;">Logout</button>
+      </div>
+    </aside>
+
+    <div class="main-wrapper">
+      <header class="topbar">
+        <div class="topbar-left">
+          <button class="menu-toggle-btn" id="sidebar-toggle">☰</button>
+          <h1 style="font-size: 1.15rem; font-weight: 600;">Step 6: My Application Profile</h1>
+        </div>
+        <div class="topbar-right">
+          <span class="badge-demo">Demo Mode</span>
+          <div class="three-dot-menu-container">
+            <button class="three-dot-btn" id="three-dot-btn" aria-haspopup="true" aria-expanded="false" title="Menu">⋮</button>
+            <div class="dropdown-menu" id="three-dot-dropdown" role="menu">
+              <a href="/pages/dashboard.html" class="dropdown-item">Dashboard</a>
+              <a href="/pages/profile.html" class="dropdown-item">My Profile</a>
+              <a href="/pages/roles.html" class="dropdown-item">1. Choose Role</a>
+              <a href="/pages/skill-gap.html" class="dropdown-item">2. Skill Gap Analysis</a>
+              <a href="/pages/roadmap.html" class="dropdown-item">3. My Roadmap</a>
+              <a href="/pages/projects.html" class="dropdown-item">4. Project Recommendations</a>
+              <a href="/pages/readiness.html" class="dropdown-item">5. Internship Readiness</a>
+              <a href="/pages/application-profile.html" class="dropdown-item">6. Application Profile</a>
+              <a href="/pages/internships.html" class="dropdown-item">Find Internships</a>
+              <a href="/pages/interview.html" class="dropdown-item">Interview Preparation</a>
+              <a href="/pages/progress.html" class="dropdown-item">My Progress</a>
+              <a href="/pages/settings.html" class="dropdown-item">Settings</a>
+              <div class="dropdown-divider"></div>
+              <a href="javascript:void(0)" onclick="Auth.logout()" class="dropdown-item" style="color: #ef4444;">Logout</a>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- Guided Step Bar Container -->
+      <div id="step-bar-container"></div>
+
+      <main class="content-body" style="max-width: 900px; margin: 0 auto;">
+        <div style="margin-bottom: 24px;">
+          <h2 style="font-size: 1.4rem; font-weight: 700; color: #0f172a;">Application Credentials & Links</h2>
+          <p style="font-size: 0.9rem; color: #64748b;">
+            Recruiters require your resume, verified LinkedIn profile, and active GitHub portfolio to consider your internship candidacy.
+          </p>
+        </div>
+
+        <!-- Section 1: Resume Upload / Management -->
+        <div class="card" style="margin-bottom: 24px;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:12px;">
+            <div>
+              <h3 style="font-size: 1.15rem; font-weight: 700; color: #0f172a; margin: 0;">1. Resume Document</h3>
+              <p style="font-size: 0.85rem; color: #64748b; margin: 4px 0 0 0;">Upload your latest PDF or DOCX resume (max 2 MB).</p>
+            </div>
+            <span id="resume-status-badge" class="badge badge-important">Not Uploaded</span>
+          </div>
+
+          <!-- Existing file panel -->
+          <div id="existing-resume-panel" style="display:none; padding:14px 18px; background:#f0fdf4; border:1px solid #bbf7d0; border-radius:8px; margin-bottom:16px;">
+            <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px;">
+              <div style="display:flex; align-items:center; gap:10px;">
+                <span style="font-size:1.5rem;">📄</span>
+                <div>
+                  <div id="current-resume-name" style="font-weight:700; color:#166534; font-size:0.92rem;">resume.pdf</div>
+                  <span style="font-size:0.75rem; color:#15803d;">Uploaded and attached to profile</span>
+                </div>
+              </div>
+              <div style="display:flex; gap:8px;">
+                <a id="download-resume-btn" href="#" target="_blank" class="btn btn-secondary" style="font-size:0.82rem; padding:6px 12px;">
+                  View / Download ↗
+                </a>
+                <button type="button" onclick="deleteResume()" class="btn btn-secondary" style="font-size:0.82rem; padding:6px 12px; color:#ef4444; border-color:#fca5a5;">
+                  Delete
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Upload new file input -->
+          <form id="resume-upload-form" style="display:flex; flex-wrap:wrap; gap:10px; align-items:center;">
+            <input type="file" id="resume-file-input" class="form-control" accept=".pdf,.docx" style="max-width:320px; font-size:0.85rem;">
+            <button type="submit" id="upload-resume-btn" class="btn btn-primary" style="font-size:0.85rem; padding:8px 18px;">
+              Upload Resume
+            </button>
+          </form>
+        </div>
+
+        <!-- Section 2: LinkedIn & Section 3: GitHub -->
+        <div class="card" style="margin-bottom: 24px;">
+          <h3 style="font-size: 1.15rem; font-weight: 700; color: #0f172a; margin-bottom: 16px;">2. Professional Links</h3>
+
+          <form id="links-form" style="display:flex; flex-direction:column; gap:18px;">
+            <!-- LinkedIn -->
+            <div>
+              <label style="font-size:0.88rem; font-weight:600; color:#334155; display:block; margin-bottom:6px;">
+                LinkedIn Profile URL
+              </label>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <input type="url" id="link-linkedin" class="form-control" placeholder="https://www.linkedin.com/in/username" style="flex:1;">
+                <button type="button" id="test-linkedin-btn" class="btn btn-secondary" style="font-size:0.85rem; padding:8px 14px; white-space:nowrap;">
+                  Test Link ↗
+                </button>
+              </div>
+              <span style="font-size:0.75rem; color:#94a3b8; display:block; margin-top:4px;">
+                Must start with https://www.linkedin.com/ or https://linkedin.com/
+              </span>
+            </div>
+
+            <!-- GitHub -->
+            <div>
+              <label style="font-size:0.88rem; font-weight:600; color:#334155; display:block; margin-bottom:6px;">
+                GitHub Profile URL
+              </label>
+              <div style="display:flex; gap:10px; align-items:center;">
+                <input type="url" id="link-github" class="form-control" placeholder="https://github.com/username" style="flex:1;">
+                <button type="button" id="test-github-btn" class="btn btn-secondary" style="font-size:0.85rem; padding:8px 14px; white-space:nowrap;">
+                  Test Link ↗
+                </button>
+              </div>
+              <span style="font-size:0.75rem; color:#94a3b8; display:block; margin-top:4px;">
+                Must start with https://github.com/
+              </span>
+            </div>
+
+            <!-- Portfolio Website (Optional) -->
+            <div>
+              <label style="font-size:0.88rem; font-weight:600; color:#334155; display:block; margin-bottom:6px;">
+                Portfolio / Personal Website (Optional)
+              </label>
+              <input type="url" id="link-portfolio" class="form-control" placeholder="https://yourportfolio.dev">
+            </div>
+
+            <div style="text-align:right; margin-top:6px;">
+              <button type="submit" id="save-links-btn" class="btn btn-primary" style="padding:10px 24px; font-weight:600;">
+                Save Profile Links
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Privacy & Honesty Disclaimer Note -->
+        <div class="card" style="background:#f8fafc; border:1px solid #e2e8f0; margin-bottom:24px;">
+          <div style="display:flex; gap:10px; align-items:center;">
+            <span style="font-size:1.2rem;">🔒</span>
+            <p style="margin:0; font-size:0.85rem; color:#475569; line-height:1.5;">
+              <strong>Privacy Guarantee:</strong> We only store your links and file for your internship applications. We never share your data without your permission.
+            </p>
+          </div>
+        </div>
+
+        <!-- Flow Navigation Footer -->
+        <div class="step-nav-footer">
+          <div>
+            <a href="/pages/readiness.html" class="btn btn-secondary">← Back: 5. Readiness Score</a>
+          </div>
+          <div>
+            <button class="btn btn-primary" onclick="window.location.href='/pages/internships.html'">
+              Find Internships →
+            </button>
+          </div>
+        </div>
+      </main>
+
+      <footer class="footer-disclaimer">
+        InternPath AI gives preparation guidance, not a guarantee of selection. Sample internships are demo data.
+      </footer>
+    </div>
+  </div>
+
+  <script src="/js/api.js"></script>
+  <script src="/js/ui.js"></script>
+  <script src="/js/menu.js"></script>
+  <script src="/js/auth.js"></script>
+  <script src="/js/application_profile.js"></script>
+</body>
+</html>

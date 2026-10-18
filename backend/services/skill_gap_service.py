@@ -1,11 +1,5 @@
 from backend.services.role_helper import get_role_by_id
-
-# Skill proficiency scores
-LEVEL_SCORES = {
-    "beginner": 0.4,
-    "intermediate": 0.7,
-    "advanced": 1.0
-}
+from backend.config import SKILL_LEVELS
 
 # Importance weight multipliers
 IMPORTANCE_WEIGHTS = {
@@ -13,6 +7,7 @@ IMPORTANCE_WEIGHTS = {
     "important": 2.0,
     "bonus": 1.0
 }
+
 
 def analyze_skill_gap(role_id: str, user_skills: list) -> dict:
     """
@@ -58,14 +53,15 @@ def analyze_skill_gap(role_id: str, user_skills: list) -> dict:
         total_possible_weight += (imp_multiplier * 1.0)
         
         if norm_name in user_skill_set:
-            level = user_skill_dict[norm_name]
-            score_multiplier = LEVEL_SCORES.get(level.lower(), 0.4)
+            raw_level = user_skill_dict[norm_name].strip()
+            level_lower = raw_level.lower()
+            score_multiplier = SKILL_LEVELS.get(level_lower, 0.4)
             accumulated_weight += (imp_multiplier * score_multiplier)
             
-            if level.lower() == "advanced":
+            if level_lower in ("high", "advanced"):
                 status = "Strong"
                 learned_list.append(req_name)
-            elif level.lower() == "intermediate":
+            elif level_lower in ("medium", "intermediate"):
                 status = "Good"
                 learned_list.append(req_name)
             else:

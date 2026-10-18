@@ -60,5 +60,36 @@ const API = {
 
   delete(endpoint) {
     return this.request(endpoint, { method: "DELETE" });
+  },
+
+  async postForm(endpoint, formData) {
+    const headers = {};
+    if (this.csrfToken) {
+      headers["X-CSRF-Token"] = this.csrfToken;
+    }
+
+    try {
+      const response = await fetch(endpoint, {
+        method: "POST",
+        headers,
+        body: formData
+      });
+
+      const tokenHeader = response.headers.get("X-CSRF-Token");
+      if (tokenHeader) {
+        this.csrfToken = tokenHeader;
+      }
+
+      const data = await response.json().catch(() => null);
+      if (!response.ok) {
+        const errorMsg = data && data.error ? data.error : `HTTP ${response.status} Error`;
+        throw new Error(errorMsg);
+      }
+      return data;
+    } catch (err) {
+      console.error(`[API] Form request to ${endpoint} failed:`, err.message);
+      throw err;
+    }
   }
 };
+
