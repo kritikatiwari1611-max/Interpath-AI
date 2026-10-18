@@ -389,7 +389,7 @@ async function changeResourceStatus(resourceId, newStatus) {
 async function loadWeeklyPlan() {
   try {
     const res = await API.get("/api/roadmap/plan");
-    currentPlan = res.data.plan || null;
+    currentPlan = (res && res.data) ? (res.data.plan || res.data) : null;
     if (activeRoadmapTab === "plan") {
       renderWeeklyPlanView();
     }
@@ -513,7 +513,7 @@ function renderWeeklyPlanView() {
         <strong>⚠️ Your skills or role have changed since this plan was generated!</strong>
         <div style="font-size:0.82rem; margin-top:2px;">Regenerate your plan to incorporate newly updated skills. Your completed sessions will carry over automatically.</div>
       </div>
-      <button class="btn btn-primary" style="padding:6px 12px; font-size:0.82rem;" onclick="document.getElementById('btn-generate-plan').click()">
+      <button class="btn btn-primary" style="padding:6px 12px; font-size:0.82rem;" onclick="triggerGeneratePlan()">
         Regenerate Now
       </button>
     `;
@@ -732,8 +732,17 @@ function renderWeeklyPlanView() {
 // Plan Action Handlers
 // ---------------------------------------------------------------------
 
+function triggerGeneratePlan() {
+  const form = document.getElementById("plan-setup-form");
+  if (form) {
+    handleGeneratePlan({ preventDefault: () => {} });
+  }
+}
+
 async function handleGeneratePlan(e) {
-  e.preventDefault();
+  if (e && typeof e.preventDefault === "function") {
+    e.preventDefault();
+  }
   const hours = parseInt(document.getElementById("plan-hours").value, 10);
   const weeks = parseInt(document.getElementById("plan-weeks").value, 10);
   const style = document.getElementById("plan-style").value;
@@ -753,7 +762,7 @@ async function handleGeneratePlan(e) {
     });
 
     UI.toast("Weekly study plan generated successfully!", "success");
-    currentPlan = res.data.plan;
+    currentPlan = (res && res.data) ? (res.data.plan || res.data) : null;
     renderWeeklyPlanView();
   } catch (err) {
     UI.toast("Failed to generate plan: " + err.message, "error");

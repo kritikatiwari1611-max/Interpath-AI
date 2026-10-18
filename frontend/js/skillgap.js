@@ -10,9 +10,10 @@ async function initSkillGap() {
   UI.showLoading(container, "Loading target role requirements and your skills...");
 
   try {
-    // 1. Fetch user profile
+    // 1. Fetch user profile and saved skills
     const profileRes = await API.get("/api/profile");
-    currentProfile = profileRes.data.profile || {};
+    currentProfile = (profileRes.data && profileRes.data.profile) || {};
+    const userSavedSkills = (profileRes.data && profileRes.data.skills) || [];
 
     // Check prerequisite: must have chosen a role
     if (!currentProfile.selected_role_id) {
@@ -33,13 +34,15 @@ async function initSkillGap() {
 
     // Initialize selection state based on user's current saved skills
     const existingSkillsMap = {};
-    (currentProfile.skills || []).forEach(s => {
-      existingSkillsMap[s.skill_name.toLowerCase()] = s.level;
+    userSavedSkills.forEach(s => {
+      if (s && s.skill_name) {
+        existingSkillsMap[s.skill_name.toLowerCase().trim()] = s.level;
+      }
     });
 
     // Populate required role skills
     (roleGapData.skills || []).forEach(s => {
-      const existingLevel = existingSkillsMap[s.name.toLowerCase()];
+      const existingLevel = existingSkillsMap[s.name.toLowerCase().trim()];
       if (existingLevel) {
         let normalizedLevel = "Medium";
         const lvlLower = existingLevel.toLowerCase();
@@ -53,10 +56,10 @@ async function initSkillGap() {
     });
 
     // Also populate extra skills not in role list
-    const roleSkillNames = new Set((roleGapData.skills || []).map(s => s.name.toLowerCase()));
+    const roleSkillNames = new Set((roleGapData.skills || []).map(s => s.name.toLowerCase().trim()));
     extraSkills = [];
-    (currentProfile.skills || []).forEach(s => {
-      if (!roleSkillNames.has(s.skill_name.toLowerCase())) {
+    userSavedSkills.forEach(s => {
+      if (s && s.skill_name && !roleSkillNames.has(s.skill_name.toLowerCase().trim())) {
         let norm = "Medium";
         const lvl = (s.level || "").toLowerCase();
         if (lvl === "low" || lvl === "beginner") norm = "Low";
@@ -363,11 +366,33 @@ async function saveAndAnalyze() {
 
     // Refresh profile and skill gap data
     const profRes = await API.get("/api/profile");
-    currentProfile = profRes.data.profile || {};
+    currentProfile = (profRes.data && profRes.data.profile) || {};
+    const refreshedSkills = (profRes.data && profRes.data.skills) || [];
     UI.renderStepBar(2, currentProfile);
 
     const gapRes = await API.get("/api/skill-gap");
     roleGapData = gapRes.data;
+
+    // Re-sync existingSkillsMap with newly saved skills
+    const refreshedMap = {};
+    refreshedSkills.forEach(s => {
+      if (s && s.skill_name) {
+        refreshedMap[s.skill_name.toLowerCase().trim()] = s.level;
+      }
+    });
+
+    (roleGapData.skills || []).forEach(s => {
+      const existingLevel = refreshedMap[s.name.toLowerCase().trim()];
+      if (existingLevel) {
+        let normalizedLevel = "Medium";
+        const lvlLower = existingLevel.toLowerCase();
+        if (lvlLower === "low" || lvlLower === "beginner") normalizedLevel = "Low";
+        else if (lvlLower === "high" || lvlLower === "advanced") normalizedLevel = "High";
+        skillSelectionState[s.name] = { knows: true, level: normalizedLevel };
+      } else {
+        skillSelectionState[s.name] = { knows: false, level: "Low" };
+      }
+    });
 
     renderSkillSelectionAndResults();
   } catch (err) {
