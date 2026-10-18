@@ -99,17 +99,17 @@ function renderInternships(list, disclaimer) {
               <div>
                 Resume: ${appReadiness.resume_uploaded 
                   ? '<span style="color:#16a34a; font-weight:700;">YES ✓</span>' 
-                  : '<a href="/pages/application-profile.html" style="color:#ef4444; font-weight:600; text-decoration:none;">NO (Upload in Step 6)</a>'}
+                  : '<a href="/pages/application-profile.html" style="color:#ef4444; font-weight:600; text-decoration:none;">NO (Upload in Profile)</a>'}
               </div>
               <div>
                 LinkedIn: ${appReadiness.linkedin_added 
                   ? '<span style="color:#16a34a; font-weight:700;">YES ✓</span>' 
-                  : '<a href="/pages/application-profile.html" style="color:#f59e0b; font-weight:600; text-decoration:none;">NO (Add in Step 6)</a>'}
+                  : '<a href="/pages/application-profile.html" style="color:#f59e0b; font-weight:600; text-decoration:none;">NO (Add in Profile)</a>'}
               </div>
               <div>
                 GitHub: ${appReadiness.github_added 
                   ? '<span style="color:#16a34a; font-weight:700;">YES ✓</span>' 
-                  : '<a href="/pages/application-profile.html" style="color:#f59e0b; font-weight:600; text-decoration:none;">NO (Add in Step 6)</a>'}
+                  : '<a href="/pages/application-profile.html" style="color:#f59e0b; font-weight:600; text-decoration:none;">NO (Add in Profile)</a>'}
               </div>
             </div>
           </div>

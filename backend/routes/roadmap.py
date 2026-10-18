@@ -13,13 +13,11 @@ def get_roadmap():
     role_id = profile.get("selected_role_id") if profile else None
 
     if not role_id:
-        return jsonify({
-            "ok": True,
-            "data": {
-                "role_selected": False,
-                "message": "Please select a target role to generate your personalized roadmap."
-            }
-        })
+        role_id = "python-developer"
+        if profile:
+            execute_query("UPDATE student_profiles SET selected_role_id = ? WHERE user_id = ?", (role_id, user_id), commit=True)
+        else:
+            execute_query("INSERT INTO student_profiles (user_id, selected_role_id) VALUES (?, ?)", (user_id, role_id), commit=True)
 
     user_skills = execute_query("SELECT skill_name, level FROM user_skills WHERE user_id = ?", (user_id,), fetch_all=True)
     

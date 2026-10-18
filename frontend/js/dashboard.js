@@ -87,7 +87,7 @@ function renderDashboard(profile, readiness, roadmap, progress, topInternships, 
 
           <!-- Continue where you left off button -->
           <a href="${nextStep.url}" class="btn" style="background:#ffffff; color:#1e3a8a; font-weight:700; padding:10px 22px; font-size:0.92rem; box-shadow:0 4px 12px rgba(0,0,0,0.2); display:inline-flex; align-items:center; gap:8px;">
-            Continue where you left off: Step ${nextStep.num} (${nextStep.title}) →
+            Continue where you left off: ${nextStep.title} →
           </a>
         </div>
 

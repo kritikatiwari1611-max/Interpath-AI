@@ -110,7 +110,7 @@ function renderReadiness(data) {
           </div>
 
           <a href="${item.link}" class="btn btn-secondary" style="font-size:0.78rem; padding:4px 10px;">
-            ${item.step ? `Go to ${item.step} →` : 'View Step →'}
+            ${item.step ? `Go to ${item.step} →` : 'Open →'}
           </a>
         </div>
       `).join("")}
@@ -207,11 +207,11 @@ function renderReadiness(data) {
   footerDiv.className = "step-nav-footer";
   footerDiv.innerHTML = `
     <div>
-      <a href="/pages/projects.html" class="btn btn-secondary">← Back: 4. Projects</a>
+      <a href="/pages/projects.html" class="btn btn-secondary">← Back: Projects</a>
     </div>
     <div>
       <button class="btn btn-primary" onclick="window.location.href='/pages/application-profile.html'">
-        Continue to Step 6: Application Profile →
+        Continue to Application Profile →
       </button>
     </div>
   `;

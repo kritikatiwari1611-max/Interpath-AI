@@ -86,7 +86,7 @@ function renderSkillSelectionAndResults() {
         <span class="badge badge-tech" style="margin-bottom: 6px;">Target Role</span>
         <h2 style="font-size: 1.4rem; font-weight: 700; color: #0f172a; margin: 0;">${roleGapData.role_title}</h2>
         <p style="font-size: 0.88rem; color: #64748b; margin: 4px 0 0 0;">
-          Mark which skills you know and choose your proficiency level. Skills you don't know yet will be automatically included in your Step 3 learning roadmap!
+          Mark which skills you know and choose your proficiency level. Skills you don't know yet will be automatically included in your learning roadmap!
         </p>
       </div>
       <div style="text-align: right; min-width: 160px;">
@@ -240,7 +240,7 @@ function renderSkillSelectionAndResults() {
           <span style="font-weight:700; color:#991b1b; font-size:0.95rem;">Missing (To Learn)</span>
           <span class="badge badge-core">${roleGapData.missing.length}</span>
         </div>
-        <p style="font-size:0.8rem; color:#991b1b; margin-bottom:10px;">Will populate your Step 3 roadmap</p>
+        <p style="font-size:0.8rem; color:#991b1b; margin-bottom:10px;">Will populate your learning roadmap</p>
         <div>
           ${roleGapData.missing.length > 0 ? roleGapData.missing.map(s => `
             <div style="padding:4px 8px; background:#ffffff; border-radius:4px; margin-bottom:4px; font-size:0.82rem; font-weight:600; color:#991b1b;">
@@ -266,7 +266,7 @@ function renderSkillSelectionAndResults() {
     <!-- Below the Result: Generate My Roadmap Callout -->
     <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 20px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px;">
       <div>
-        <h4 style="font-size: 1.05rem; font-weight: 700; color: #1e3a8a; margin: 0 0 4px 0;">Ready for Step 3?</h4>
+        <h4 style="font-size: 1.05rem; font-weight: 700; color: #1e3a8a; margin: 0 0 4px 0;">Ready for your Roadmap?</h4>
         <p style="font-size: 0.88rem; color: #2563eb; margin: 0;">
           Generate your personalized stage-by-stage learning roadmap covering all missing and low skills.
         </p>
@@ -283,11 +283,11 @@ function renderSkillSelectionAndResults() {
   footerDiv.className = "step-nav-footer";
   footerDiv.innerHTML = `
     <div>
-      <a href="/pages/roles.html" class="btn btn-secondary">← Back: 1. Choose Role</a>
+      <a href="/pages/roles.html" class="btn btn-secondary">← Back: Choose Role</a>
     </div>
     <div>
       <button class="btn btn-primary" onclick="window.location.href='/pages/roadmap.html'">
-        Continue to Step 3: Roadmap →
+        Continue to Roadmap →
       </button>
     </div>
   `;

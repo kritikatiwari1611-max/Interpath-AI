@@ -112,15 +112,15 @@ def get_readiness():
     link_added = linkedin_present or github_present
 
     completion_checklist = [
-        {"item": "Target role chosen", "done": bool(role_id), "link": "/pages/roles.html", "step": "Step 1"},
-        {"item": "Skills marked in Skill Gap", "done": len(user_skills) > 0, "link": "/pages/skill-gap.html", "step": "Step 2"},
-        {"item": "Missing skills under 3", "done": missing_under_3, "link": "/pages/skill-gap.html", "step": "Step 2"},
-        {"item": "Foundation stage started", "done": foundation_started, "link": "/pages/roadmap.html", "step": "Step 3"},
-        {"item": "At least 3 learning resources completed", "done": res_done_num >= 3, "link": "/pages/roadmap.html", "step": "Step 3"},
-        {"item": "At least 1 project in progress or completed", "done": at_least_one_project, "link": "/pages/projects.html", "step": "Step 4"},
+        {"item": "Target role chosen", "done": bool(role_id), "link": "/pages/roles.html", "step": "Choose Role"},
+        {"item": "Skills marked in Skill Gap", "done": len(user_skills) > 0, "link": "/pages/skill-gap.html", "step": "Skill Gap"},
+        {"item": "Missing skills under 3", "done": missing_under_3, "link": "/pages/skill-gap.html", "step": "Skill Gap"},
+        {"item": "Foundation stage started", "done": foundation_started, "link": "/pages/roadmap.html", "step": "Roadmap"},
+        {"item": "At least 3 learning resources completed", "done": res_done_num >= 3, "link": "/pages/roadmap.html", "step": "Roadmap"},
+        {"item": "At least 1 project in progress or completed", "done": at_least_one_project, "link": "/pages/projects.html", "step": "Projects"},
         {"item": "Mock interview completed", "done": len(mocks) >= 1, "link": "/pages/interview.html", "step": "Interview Prep"},
-        {"item": "Resume uploaded", "done": resume_file_present, "link": "/pages/application-profile.html", "step": "Step 6"},
-        {"item": "LinkedIn or GitHub link added", "done": link_added, "link": "/pages/application-profile.html", "step": "Step 6"}
+        {"item": "Resume uploaded", "done": resume_file_present, "link": "/pages/application-profile.html", "step": "Application Profile"},
+        {"item": "LinkedIn or GitHub link added", "done": link_added, "link": "/pages/application-profile.html", "step": "Application Profile"}
     ]
     readiness["completion_checklist"] = completion_checklist
     readiness["profile_links"] = {

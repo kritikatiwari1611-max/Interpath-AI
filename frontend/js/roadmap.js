@@ -19,15 +19,6 @@ async function initRoadmap() {
     const profRes = await API.get("/api/profile");
     currentProfile = profRes.data.profile || {};
 
-    if (!currentProfile.selected_role_id) {
-      window.location.href = "/pages/roles.html?msg=role_required";
-      return;
-    }
-    if (!currentProfile.skills || currentProfile.skills.length === 0) {
-      window.location.href = "/pages/skill-gap.html?msg=skills_required";
-      return;
-    }
-
     UI.renderStepBar(3, currentProfile);
 
     // 2. Fetch roadmap and resources in parallel
@@ -49,8 +40,8 @@ function renderRoadmapView() {
   const container = document.getElementById("roadmap-content");
   container.innerHTML = "";
 
-  if (!currentRoadmap || !currentRoadmap.role_selected) {
-    UI.showEmpty(container, "Please select a target role in Step 1 first.");
+  if (!currentRoadmap || !currentRoadmap.stages || currentRoadmap.stages.length === 0) {
+    UI.showEmpty(container, "No roadmap stages available. Please select a target role first.");
     return;
   }
 
@@ -287,7 +278,7 @@ function renderRoadmapView() {
   footerDiv.className = "step-nav-footer";
   footerDiv.innerHTML = `
     <div>
-      <a href="/pages/skill-gap.html" class="btn btn-secondary">← Back: 2. Skill Gap Analysis</a>
+      <a href="/pages/skill-gap.html" class="btn btn-secondary">← Back: Skill Gap Analysis</a>
     </div>
     <div>
       <button class="btn btn-primary" onclick="window.location.href='/pages/projects.html'">

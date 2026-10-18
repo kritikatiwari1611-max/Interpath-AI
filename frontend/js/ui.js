@@ -147,7 +147,7 @@ const UI = {
       const nodeMarkup = `
         <a href="${stepItem.url}" class="${nodeClass}" title="${stepItem.title}">
           <span class="step-circle">${circleContent}</span>
-          <span>${stepItem.step}. ${stepItem.title}</span>
+          <span>${stepItem.title}</span>
         </a>
       `;
 
@@ -157,8 +157,8 @@ const UI = {
 
     wrapper.innerHTML = `
       <div style="max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
-        <span style="font-size: 0.85rem; font-weight: 700; color: #1e293b; text-transform: uppercase; letter-spacing: 0.5px;">
-          Step ${currentStepNum} of ${GUIDED_STEPS.length}: <span style="color: #2563eb;">${currentStepObj.title}</span>
+        <span style="font-size: 0.95rem; font-weight: 700; color: #1e293b; letter-spacing: 0.3px;">
+          <span style="color: #2563eb;">${currentStepObj.title}</span>
         </span>
         <span style="font-size: 0.8rem; color: #64748b;">Guided Internship Path</span>
       </div>
