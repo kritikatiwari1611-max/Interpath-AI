@@ -101,70 +101,10 @@ const UI = {
     return true;
   },
 
-  // Render the step progress bar ("Step X of 6: Title") with ticked completed steps
+  // Step bar removed per user request
   renderStepBar(currentStepNum, profile = null) {
-    let wrapper = document.getElementById("step-bar-container");
-    if (!wrapper) {
-      // Find where to insert: below topbar, before content-body
-      const topbar = document.querySelector(".topbar");
-      if (topbar && topbar.parentNode) {
-        wrapper = document.createElement("div");
-        wrapper.id = "step-bar-container";
-        wrapper.className = "step-bar-wrapper";
-        topbar.parentNode.insertBefore(wrapper, topbar.nextSibling);
-      } else {
-        return;
-      }
-    }
-
-    const currentStepObj = GUIDED_STEPS.find(s => s.step === currentStepNum) || GUIDED_STEPS[0];
-
-    // Determine completion for each step
-    const hasRole = Boolean(profile && profile.selected_role_id);
-    const hasSkills = Boolean(profile && profile.skills && profile.skills.length > 0);
-    const hasProjects = Boolean(profile && profile.projects && profile.projects.length > 0);
-    const hasApplication = Boolean(profile && (profile.resume_filename || (profile.linkedin_link && profile.portfolio_link)));
-
-    const stepsHtml = GUIDED_STEPS.map((stepItem, idx) => {
-      const isCurrent = stepItem.step === currentStepNum;
-      
-      // Step completion heuristic
-      let isCompleted = false;
-      if (stepItem.step === 1 && hasRole) isCompleted = true;
-      if (stepItem.step === 2 && hasSkills) isCompleted = true;
-      if (stepItem.step === 3 && hasSkills) isCompleted = true; // Roadmap generated
-      if (stepItem.step === 4 && hasProjects) isCompleted = true;
-      if (stepItem.step === 5 && hasRole && hasSkills) isCompleted = true;
-      if (stepItem.step === 6 && hasApplication) isCompleted = true;
-
-      // Completed earlier steps are clickable; current is active
-      let nodeClass = "step-node";
-      if (isCurrent) nodeClass += " active";
-      else if (isCompleted) nodeClass += " completed";
-
-      const checkmark = isCompleted && !isCurrent ? `<span class="step-circle">✓</span>` : ``;
-
-      const nodeMarkup = `
-        <a href="${stepItem.url}" class="${nodeClass}" title="${stepItem.title}">
-          ${checkmark}<span>${stepItem.title}</span>
-        </a>
-      `;
-
-      const separator = idx < GUIDED_STEPS.length - 1 ? `<span class="step-separator">›</span>` : "";
-      return nodeMarkup + separator;
-    }).join("");
-
-    wrapper.innerHTML = `
-      <div style="max-width: 1100px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 8px;">
-        <span style="font-size: 0.95rem; font-weight: 700; color: #1e293b; letter-spacing: 0.3px;">
-          <span style="color: #2563eb;">${currentStepObj.title}</span>
-        </span>
-        <span style="font-size: 0.8rem; color: #64748b;">Guided Internship Path</span>
-      </div>
-      <div class="step-bar">
-        ${stepsHtml}
-      </div>
-    `;
+    const wrapper = document.getElementById("step-bar-container");
+    if (wrapper) wrapper.remove();
   },
 
   // Helper to render standard Back / Next footer buttons
