@@ -21,6 +21,10 @@ CREATE TABLE IF NOT EXISTS student_profiles (
     resume_checklist_json TEXT DEFAULT '{}',
     github_link TEXT DEFAULT '',
     selected_role_id TEXT DEFAULT '',
+    linkedin_link TEXT DEFAULT '',
+    portfolio_link TEXT DEFAULT '',
+    resume_filename TEXT DEFAULT '',
+    resume_original_name TEXT DEFAULT '',
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
@@ -39,6 +43,10 @@ CREATE TABLE IF NOT EXISTS user_projects (
     description TEXT DEFAULT '',
     tech TEXT DEFAULT '',
     status TEXT DEFAULT 'completed', -- 'in_progress', 'completed'
+    github_link TEXT DEFAULT '',
+    demo_link TEXT DEFAULT '',
+    report_filename TEXT DEFAULT '',
+    report_original_name TEXT DEFAULT '',
     FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 

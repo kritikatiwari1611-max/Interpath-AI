@@ -318,7 +318,7 @@ def create_mock_session(user_id: int, role_id: str, category: str, difficulty: s
     # If focus on missing skills requested, prioritize user's missing/low skills
     if focus_missing_skills and user_id:
         user_skills = execute_query(
-            "SELECT skill_name FROM skills WHERE user_id = ? AND (status = 'Missing' OR level = 'Low')",
+            "SELECT skill_name FROM user_skills WHERE user_id = ? AND (level = 'Low' OR level = 'Beginner')",
             (user_id,),
             fetch_all=True
         )

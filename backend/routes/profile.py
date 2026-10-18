@@ -8,55 +8,72 @@ profile_bp = Blueprint("profile", __name__)
 @profile_bp.route("/profile", methods=["GET"])
 @login_required
 def get_profile():
-    user_id = session["user_id"]
-    profile = execute_query("SELECT * FROM student_profiles WHERE user_id = ?", (user_id,), fetch_one=True)
-    if not profile:
-        profile = {
-            "course": "", "specialization": "", "semester": "", "college": "",
-            "career_goal": "", "interests": "", "resume_status": "none",
-            "resume_checklist_json": "{}", "github_link": "", "selected_role_id": "",
-            "linkedin_link": "", "portfolio_link": "", "resume_filename": "", "resume_original_name": ""
-        }
-    
-    # Parse checklist JSON safely
     try:
-        checklist = json.loads(profile.get("resume_checklist_json") or "{}")
-    except Exception:
-        checklist = {}
+        user_id = session["user_id"]
+        profile = execute_query("SELECT * FROM student_profiles WHERE user_id = ?", (user_id,), fetch_one=True)
+        if not profile:
+            profile = {
+                "course": "", "specialization": "", "semester": "", "college": "",
+                "career_goal": "", "interests": "", "resume_status": "none",
+                "resume_checklist_json": "{}", "github_link": "", "selected_role_id": "",
+                "linkedin_link": "", "portfolio_link": "", "resume_filename": "", "resume_original_name": ""
+            }
+        
+        # Parse checklist JSON safely
+        try:
+            checklist = json.loads(profile.get("resume_checklist_json") or "{}")
+        except Exception:
+            checklist = {}
 
-    # Fetch skills, projects, and certifications
-    skills = execute_query("SELECT id, skill_name, level FROM user_skills WHERE user_id = ?", (user_id,), fetch_all=True)
-    projects = execute_query(
-        "SELECT id, title, description, tech, status, github_link, demo_link, report_filename, report_original_name FROM user_projects WHERE user_id = ?",
-        (user_id,),
-        fetch_all=True
-    )
-    certs = execute_query("SELECT id, title, issuer FROM user_certifications WHERE user_id = ?", (user_id,), fetch_all=True)
+        # Fetch skills safely
+        skills = execute_query("SELECT id, skill_name, level FROM user_skills WHERE user_id = ?", (user_id,), fetch_all=True)
 
-    return jsonify({
-        "ok": True,
-        "data": {
-            "profile": {
-                "course": profile.get("course", "") or "",
-                "specialization": profile.get("specialization", "") or "",
-                "semester": profile.get("semester", "") or "",
-                "college": profile.get("college", "") or "",
-                "career_goal": profile.get("career_goal", "") or "",
-                "interests": profile.get("interests", "") or "",
-                "resume_status": profile.get("resume_status", "none") or "none",
-                "resume_checklist": checklist,
-                "github_link": profile.get("github_link", "") or "",
-                "linkedin_link": profile.get("linkedin_link", "") or "",
-                "portfolio_link": profile.get("portfolio_link", "") or "",
-                "resume_filename": profile.get("resume_filename", "") or "",
-                "resume_original_name": profile.get("resume_original_name", "") or "",
-                "selected_role_id": profile.get("selected_role_id", "") or ""
-            },
-            "skills": skills,
-            "projects": projects,
-            "certifications": certs
-        }
-    })
+        # Fetch projects safely using SELECT * to protect against missing migration columns
+        raw_projects = execute_query("SELECT * FROM user_projects WHERE user_id = ?", (user_id,), fetch_all=True)
+        projects = []
+        for p in (raw_projects or []):
+            projects.append({
+                "id": p.get("id"),
+                "title": p.get("title", ""),
+                "description": p.get("description", ""),
+                "tech": p.get("tech", ""),
+                "status": p.get("status", "completed"),
+                "github_link": p.get("github_link", "") or "",
+                "demo_link": p.get("demo_link", "") or "",
+                "report_filename": p.get("report_filename", "") or "",
+                "report_original_name": p.get("report_original_name", "") or ""
+            })
+
+        # Fetch certifications safely
+        certs = execute_query("SELECT id, title, issuer FROM user_certifications WHERE user_id = ?", (user_id,), fetch_all=True)
+
+        return jsonify({
+            "ok": True,
+            "data": {
+                "profile": {
+                    "course": profile.get("course", "") or "",
+                    "specialization": profile.get("specialization", "") or "",
+                    "semester": profile.get("semester", "") or "",
+                    "college": profile.get("college", "") or "",
+                    "career_goal": profile.get("career_goal", "") or "",
+                    "interests": profile.get("interests", "") or "",
+                    "resume_status": profile.get("resume_status", "none") or "none",
+                    "resume_checklist": checklist,
+                    "github_link": profile.get("github_link", "") or "",
+                    "linkedin_link": profile.get("linkedin_link", "") or "",
+                    "portfolio_link": profile.get("portfolio_link", "") or "",
+                    "resume_filename": profile.get("resume_filename", "") or "",
+                    "resume_original_name": profile.get("resume_original_name", "") or "",
+                    "selected_role_id": profile.get("selected_role_id", "") or ""
+                },
+                "skills": skills or [],
+                "projects": projects,
+                "certifications": certs or []
+            }
+        })
+    except Exception as e:
+        print(f"Error loading profile: {e}")
+        return jsonify({"ok": False, "error": f"Failed to load profile: {str(e)}"}), 500
 
 @profile_bp.route("/profile", methods=["PUT"])
 @login_required

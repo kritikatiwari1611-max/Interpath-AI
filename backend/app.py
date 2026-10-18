@@ -20,6 +20,15 @@ from backend.routes.settings import settings_bp
 from backend.routes.health import health_bp
 
 def create_app():
+    # Ensure database schema, migrations, and initial seed data exist (critical for cloud deployment)
+    try:
+        from backend.db import init_db
+        from database.seed import seed_database
+        init_db()
+        seed_database()
+    except Exception as e:
+        print(f"[create_app] Database setup notice: {e}")
+
     app = Flask(__name__, static_folder=str(FRONTEND_DIR), static_url_path="")
     app.config["SECRET_KEY"] = SECRET_KEY
     app.config["SESSION_COOKIE_HTTPONLY"] = True

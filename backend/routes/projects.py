@@ -41,11 +41,24 @@ def list_projects():
         item["is_recommended"] = (p.get("role_id") == role_id)
         results.append(item)
 
-    custom_rows = execute_query(
-        "SELECT id, title, description, tech, status, github_link, demo_link, report_filename, report_original_name FROM user_projects WHERE user_id = ? ORDER BY id DESC",
+    raw_custom = execute_query(
+        "SELECT * FROM user_projects WHERE user_id = ? ORDER BY id DESC",
         (user_id,),
         fetch_all=True
     )
+    custom_rows = []
+    for p in (raw_custom or []):
+        custom_rows.append({
+            "id": p.get("id"),
+            "title": p.get("title", ""),
+            "description": p.get("description", ""),
+            "tech": p.get("tech", ""),
+            "status": p.get("status", "completed"),
+            "github_link": p.get("github_link", "") or "",
+            "demo_link": p.get("demo_link", "") or "",
+            "report_filename": p.get("report_filename", "") or "",
+            "report_original_name": p.get("report_original_name", "") or ""
+        })
 
     return jsonify({"ok": True, "data": results, "custom_projects": custom_rows})
 
@@ -53,11 +66,24 @@ def list_projects():
 @login_required
 def get_custom_projects():
     user_id = session["user_id"]
-    custom_rows = execute_query(
-        "SELECT id, title, description, tech, status, github_link, demo_link, report_filename, report_original_name FROM user_projects WHERE user_id = ? ORDER BY id DESC",
+    raw_custom = execute_query(
+        "SELECT * FROM user_projects WHERE user_id = ? ORDER BY id DESC",
         (user_id,),
         fetch_all=True
     )
+    custom_rows = []
+    for p in (raw_custom or []):
+        custom_rows.append({
+            "id": p.get("id"),
+            "title": p.get("title", ""),
+            "description": p.get("description", ""),
+            "tech": p.get("tech", ""),
+            "status": p.get("status", "completed"),
+            "github_link": p.get("github_link", "") or "",
+            "demo_link": p.get("demo_link", "") or "",
+            "report_filename": p.get("report_filename", "") or "",
+            "report_original_name": p.get("report_original_name", "") or ""
+        })
     return jsonify({"ok": True, "data": custom_rows})
 
 @projects_bp.route("/projects/<project_id>/status", methods=["PUT"])

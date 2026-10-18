@@ -92,6 +92,7 @@ def init_db():
 
         # Seamless migrations for guided flow additions
         migrations = [
+            ("student_profiles", "selected_role_id", "TEXT DEFAULT ''"),
             ("student_profiles", "linkedin_link", "TEXT DEFAULT ''"),
             ("student_profiles", "portfolio_link", "TEXT DEFAULT ''"),
             ("student_profiles", "resume_filename", "TEXT DEFAULT ''"),
@@ -99,6 +100,7 @@ def init_db():
             ("user_projects", "github_link", "TEXT DEFAULT ''"),
             ("user_projects", "demo_link", "TEXT DEFAULT ''"),
             ("user_projects", "report_filename", "TEXT DEFAULT ''"),
+            ("user_projects", "report_original_name", "TEXT DEFAULT ''"),
             ("resource_progress", "status", "TEXT DEFAULT 'pending'"),
             ("interview_attempts", "score", "INTEGER DEFAULT 0"),
             ("interview_attempts", "mode", "TEXT DEFAULT 'demo'"),
