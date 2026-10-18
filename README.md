@@ -38,6 +38,30 @@ graph TD
 
 ---
 
+## 🗺️ Guided 6-Step Internship Pathway
+
+InternPath AI guides students through an intuitive, structured progression to ensure they are fully prepared before applying:
+
+```
+Login 
+  ↓
+Step 1: Choose Target Role (12+ Tech & Non-Tech Roles)
+  ↓
+Step 2: Skill Gap Analyzer (Interactive Low 0.4 / Medium 0.7 / High 1.0 Selection)
+  ↓
+Step 3: Stage-by-Stage Roadmap (Embedded Learning Hub: Videos, Docs, Practice)
+  ↓
+Step 4: Portfolio Projects (Role-Recommended + Custom with GitHub & PDF Report)
+  ↓
+Step 5: Internship Readiness Score (Deterministic 0-100%, 65% Threshold Banner, 9-Item Checklist)
+  ↓
+Step 6: Application Profile (Resume Upload, LinkedIn & GitHub Links Verification)
+  ↓
+Final Destination: Matched Internships (with "Prepare to Apply" Credentials Verification Panel)
+```
+
+---
+
 ## 🎯 Objective to Feature Traceability
 
 | Objective | Description | Working Feature | Verified In Code |
@@ -121,7 +145,7 @@ $$\text{Overall Score} = \frac{\sum (\text{Category Score} \times \text{Weight})
 ---
 
 ## 🧪 Automated Testing
-Run the complete automated test suite (22 unit & integration tests):
+Run the complete automated test suite (28 unit & integration tests):
 ```bash
 pytest
 ```
