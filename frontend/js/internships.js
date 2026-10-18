@@ -124,6 +124,21 @@ function renderInternships(list, disclaimer) {
 
     container.appendChild(card);
   });
+
+  // Navigation Footer
+  const footerDiv = document.createElement("div");
+  footerDiv.className = "step-nav-footer";
+  footerDiv.innerHTML = `
+    <div>
+      <a href="/pages/readiness.html" class="btn btn-secondary">← Back: Application Score</a>
+    </div>
+    <div>
+      <button class="btn btn-primary" onclick="window.location.href='/pages/interview.html'">
+        Practice Interview Prep →
+      </button>
+    </div>
+  `;
+  container.appendChild(footerDiv);
 }
 
 function handleApplyClick(url) {

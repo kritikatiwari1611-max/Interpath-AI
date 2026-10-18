@@ -5,8 +5,8 @@ const GUIDED_STEPS = [
   { step: 2, title: "Skill Gap", url: "/pages/skill-gap.html" },
   { step: 3, title: "Roadmap & Learning", url: "/pages/roadmap.html" },
   { step: 4, title: "Projects", url: "/pages/projects.html" },
-  { step: 5, title: "Readiness Score", url: "/pages/readiness.html" },
-  { step: 6, title: "Application Profile", url: "/pages/application-profile.html" }
+  { step: 5, title: "Application Score", url: "/pages/readiness.html" },
+  { step: 6, title: "Find Internships", url: "/pages/internships.html" }
 ];
 
 const UI = {

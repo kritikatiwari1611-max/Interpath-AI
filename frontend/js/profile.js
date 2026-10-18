@@ -6,15 +6,20 @@ let currentProjects = [];
 let currentCerts = [];
 
 async function loadProfile() {
-  const container = document.getElementById("profile-content");
-  UI.showLoading(container, "Loading your profile...");
+  const skillsList = document.getElementById("skills-list");
+  const projectsList = document.getElementById("projects-list");
+  const certsList = document.getElementById("certs-list");
+
+  if (skillsList) UI.showLoading(skillsList, "Loading skills...");
+  if (projectsList) UI.showLoading(projectsList, "Loading projects...");
+  if (certsList) UI.showLoading(certsList, "Loading certifications...");
 
   try {
     const res = await API.get("/api/profile");
-    currentProfile = res.data.profile;
-    currentSkills = res.data.skills || [];
-    currentProjects = res.data.projects || [];
-    currentCerts = res.data.certifications || [];
+    currentProfile = (res.data && res.data.profile) ? res.data.profile : {};
+    currentSkills = (res.data && res.data.skills) ? res.data.skills : [];
+    currentProjects = (res.data && res.data.projects) ? res.data.projects : [];
+    currentCerts = (res.data && res.data.certifications) ? res.data.certifications : [];
 
     renderProfileForm();
     renderSkillsList();
@@ -26,24 +31,33 @@ async function loadProfile() {
 }
 
 function renderProfileForm() {
-  const p = currentProfile;
-  document.getElementById("course").value = p.course || "";
-  document.getElementById("specialization").value = p.specialization || "";
-  document.getElementById("semester").value = p.semester || "";
-  document.getElementById("college").value = p.college || "";
-  document.getElementById("career_goal").value = p.career_goal || "";
-  document.getElementById("interests").value = p.interests || "";
-  document.getElementById("github_link").value = p.github_link || "";
-  document.getElementById("resume_status").value = p.resume_status || "none";
+  const p = currentProfile || {};
+  const setVal = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.value = val != null ? val : "";
+  };
+  const setChk = (id, val) => {
+    const el = document.getElementById(id);
+    if (el) el.checked = Boolean(val);
+  };
+
+  setVal("course", p.course || "BCA");
+  setVal("specialization", p.specialization || "");
+  setVal("semester", p.semester || "");
+  setVal("college", p.college || "");
+  setVal("career_goal", p.career_goal || "");
+  setVal("interests", p.interests || "");
+  setVal("github_link", p.github_link || "");
+  setVal("resume_status", p.resume_status || "none");
 
   // Resume checklist checkboxes
   const cl = p.resume_checklist || {};
-  document.getElementById("chk_resume_exists").checked = !!cl.resume_exists;
-  document.getElementById("chk_education_listed").checked = !!cl.education_listed;
-  document.getElementById("chk_matching_skills_listed").checked = !!cl.matching_skills_listed;
-  document.getElementById("chk_relevant_project_included").checked = !!cl.relevant_project_included;
-  document.getElementById("chk_experience_volunteering").checked = !!cl.experience_volunteering;
-  document.getElementById("chk_contact_portfolio_links").checked = !!cl.contact_portfolio_links;
+  setChk("chk_resume_exists", cl.resume_exists);
+  setChk("chk_education_listed", cl.education_listed);
+  setChk("chk_matching_skills_listed", cl.matching_skills_listed);
+  setChk("chk_relevant_project_included", cl.relevant_project_included);
+  setChk("chk_experience_volunteering", cl.experience_volunteering);
+  setChk("chk_contact_portfolio_links", cl.contact_portfolio_links);
 }
 
 function renderSkillsList() {
@@ -158,23 +172,32 @@ async function saveFullProfile() {
   saveBtn.disabled = true;
   saveBtn.textContent = "Saving...";
 
+  const getVal = (id) => {
+    const el = document.getElementById(id);
+    return el ? el.value.trim() : "";
+  };
+  const getChk = (id) => {
+    const el = document.getElementById(id);
+    return el ? el.checked : false;
+  };
+
   const profilePayload = {
-    course: document.getElementById("course").value.trim(),
-    specialization: document.getElementById("specialization").value.trim(),
-    semester: document.getElementById("semester").value.trim(),
-    college: document.getElementById("college").value.trim(),
-    career_goal: document.getElementById("career_goal").value.trim(),
-    interests: document.getElementById("interests").value.trim(),
-    github_link: document.getElementById("github_link").value.trim(),
-    resume_status: document.getElementById("resume_status").value,
+    course: getVal("course"),
+    specialization: getVal("specialization"),
+    semester: getVal("semester"),
+    college: getVal("college"),
+    career_goal: getVal("career_goal"),
+    interests: getVal("interests"),
+    github_link: getVal("github_link"),
+    resume_status: getVal("resume_status") || "none",
     selected_role_id: currentProfile ? currentProfile.selected_role_id : "",
     resume_checklist: {
-      resume_exists: document.getElementById("chk_resume_exists").checked,
-      education_listed: document.getElementById("chk_education_listed").checked,
-      matching_skills_listed: document.getElementById("chk_matching_skills_listed").checked,
-      relevant_project_included: document.getElementById("chk_relevant_project_included").checked,
-      experience_volunteering: document.getElementById("chk_experience_volunteering").checked,
-      contact_portfolio_links: document.getElementById("chk_contact_portfolio_links").checked
+      resume_exists: getChk("chk_resume_exists"),
+      education_listed: getChk("chk_education_listed"),
+      matching_skills_listed: getChk("chk_matching_skills_listed"),
+      relevant_project_included: getChk("chk_relevant_project_included"),
+      experience_volunteering: getChk("chk_experience_volunteering"),
+      contact_portfolio_links: getChk("chk_contact_portfolio_links")
     }
   };
 

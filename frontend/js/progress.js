@@ -95,6 +95,18 @@ function renderProgress(data) {
         </table>
       ` : '<p style="font-size: 0.88rem; color: #64748b; margin-top: 8px;">No mock interviews recorded yet. Complete one under Interview Prep.</p>'}
     </div>
+
+    <!-- Flow Navigation Footer -->
+    <div class="step-nav-footer" style="margin-top: 24px;">
+      <div>
+        <a href="/pages/interview.html" class="btn btn-secondary">← Back: Interview Prep</a>
+      </div>
+      <div>
+        <button class="btn btn-primary" onclick="window.location.href='/pages/dashboard.html'">
+          Back to Dashboard →
+        </button>
+      </div>
+    </div>
   `;
 }
 
