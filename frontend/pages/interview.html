@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Interview Preparation & Mock Sessions – InternPath AI</title>
+  <title>Interview Preparation & AI Mock Sessions – InternPath AI</title>
   <link rel="stylesheet" href="/css/style.css">
 </head>
 <body>
@@ -39,16 +39,16 @@
       <header class="topbar">
         <div class="topbar-left">
           <button class="menu-toggle-btn" id="sidebar-toggle">☰</button>
-          <h1 style="font-size: 1.15rem; font-weight: 600;">Role-Based Interview Preparation</h1>
+          <h1 style="font-size: 1.15rem; font-weight: 600;">Role-Based Interview Preparation & Mock Sessions</h1>
         </div>
         <div class="topbar-right">
-          <span class="badge-demo">Demo Mode</span>
+          <span id="top-mode-badge" class="badge-demo">Demo Mode</span>
         </div>
       </header>
 
       <main class="content-body">
         
-        <!-- Interview Performance Metric Strip -->
+        <!-- Performance Metric Strip -->
         <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin-bottom: 24px;">
           <div class="card" style="margin-bottom: 0; padding: 16px;">
             <div style="font-size: 0.8rem; color: #64748b;">Total Attempts</div>
@@ -69,16 +69,24 @@
           
           <!-- Mock Setup View -->
           <div id="mock-setup-card">
-            <h2 class="card-title">Simulate a Real-Time Mock Interview</h2>
-            <p class="card-subtitle">One question at a time with instant keyword and rule-based feedback.</p>
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 8px;">
+              <div>
+                <h2 class="card-title">Simulate a Real-Time Mock Interview</h2>
+                <p class="card-subtitle">Role-appropriate technical and behavioral questions evaluated against strict rubric criteria.</p>
+              </div>
+              <span id="setup-mode-tag" class="badge badge-tech" style="font-size: 0.78rem;">Demo mode (rule-based)</span>
+            </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 20px;">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; margin-bottom: 16px;">
               <div class="form-group" style="margin-bottom: 0;">
-                <label class="form-label" for="mock-role">Interview Role</label>
+                <label class="form-label" for="mock-role">Target Role</label>
                 <select id="mock-role" class="form-control">
                   <option value="python-developer">Python Developer</option>
-                  <option value="finance">Finance Analyst</option>
                   <option value="web-developer">Web Developer</option>
+                  <option value="data-analyst">Data Analyst</option>
+                  <option value="finance">Finance Analyst</option>
+                  <option value="digital-marketing">Digital Marketing</option>
+                  <option value="human-resources">Human Resources</option>
                   <option value="all">All Roles (General)</option>
                 </select>
               </div>
@@ -86,7 +94,7 @@
               <div class="form-group" style="margin-bottom: 0;">
                 <label class="form-label" for="mock-category">Category</label>
                 <select id="mock-category" class="form-control">
-                  <option value="all">Technical & Behavioral</option>
+                  <option value="all">Mixed (Technical & Behavioral)</option>
                   <option value="Technical">Technical Only</option>
                   <option value="HR">HR / Introduction</option>
                   <option value="Behavioral">Behavioral (STAR)</option>
@@ -96,7 +104,7 @@
               <div class="form-group" style="margin-bottom: 0;">
                 <label class="form-label" for="mock-difficulty">Difficulty</label>
                 <select id="mock-difficulty" class="form-control">
-                  <option value="all">All Difficulties</option>
+                  <option value="all">Mixed Difficulties</option>
                   <option value="Basic">Basic</option>
                   <option value="Intermediate">Intermediate</option>
                   <option value="Advanced">Advanced</option>
@@ -106,10 +114,19 @@
               <div class="form-group" style="margin-bottom: 0;">
                 <label class="form-label" for="mock-num">Number of Questions</label>
                 <select id="mock-num" class="form-control">
-                  <option value="5">5 Questions (Quick)</option>
-                  <option value="10">10 Questions (Standard)</option>
+                  <option value="3">3 Questions (Mini Drill)</option>
+                  <option value="5" selected>5 Questions (Standard)</option>
+                  <option value="10">10 Questions (Full Mock)</option>
                 </select>
               </div>
+            </div>
+
+            <!-- Focus on Missing Skills Checkbox -->
+            <div style="margin-bottom: 20px;">
+              <label style="display: inline-flex; align-items: center; gap: 8px; font-size: 0.9rem; color: #334155; cursor: pointer;">
+                <input type="checkbox" id="mock-focus-missing" style="width: 16px; height: 16px;">
+                <span><strong>Focus on my missing skills</strong> (prioritizes gaps flagged in your Skill Gap analysis)</span>
+              </label>
             </div>
 
             <button type="button" id="start-mock-btn" class="btn btn-primary" style="padding: 10px 24px;">
@@ -119,42 +136,236 @@
 
           <!-- Active Question View -->
           <div id="mock-active-card" style="display: none;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-              <span id="mock-progress-badge" class="badge badge-tech" style="font-size: 0.85rem; padding: 4px 10px;">Question 1 of 5</span>
-              <span id="mock-question-meta" style="font-size: 0.8rem; color: #64748b;">Technical</span>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+              <div style="display: flex; gap: 8px; align-items: center;">
+                <span id="mock-progress-badge" class="badge badge-tech" style="font-size: 0.85rem; padding: 4px 10px;">Question 1 of 5</span>
+                <span id="mock-question-meta" style="font-size: 0.8rem; color: #64748b;">Technical</span>
+              </div>
+              <span id="mock-mode-badge" class="badge badge-bonus" style="font-size: 0.78rem;">Demo mode (rule-based)</span>
             </div>
 
-            <h3 id="mock-question-title" style="font-size: 1.2rem; font-weight: 700; margin-bottom: 16px; color: #0f172a;"></h3>
+            <h3 id="mock-question-title" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 14px; color: #0f172a; line-height: 1.4;"></h3>
 
-            <div id="mock-answer-area" style="margin-bottom: 16px;"></div>
+            <!-- Student Answer Area -->
+            <div id="mock-answer-area" style="margin-bottom: 12px;"></div>
 
-            <!-- Inline Feedback Box -->
-            <div id="mock-feedback-box" style="display: none; padding: 14px 16px; border-radius: 8px; margin-bottom: 16px;">
-              <div id="mock-fb-title" style="font-weight: 700; font-size: 0.92rem; margin-bottom: 4px;"></div>
-              <p id="mock-fb-text" style="font-size: 0.85rem; line-height: 1.5; color: #334155;"></p>
-              <div id="mock-fb-label" style="font-size: 0.72rem; color: #64748b; margin-top: 6px; font-style: italic;"></div>
+            <!-- Character counter for written input -->
+            <div id="mock-char-counter-wrap" style="display: flex; justify-content: flex-end; font-size: 0.78rem; color: #64748b; margin-bottom: 14px;">
+              <span id="mock-char-counter">0 / 1500 characters</span>
             </div>
 
-            <div style="display: flex; gap: 12px;">
+            <!-- Loading Indicator -->
+            <div id="mock-loading-indicator" style="display: none; padding: 12px; background: #eff6ff; border-radius: 8px; color: #1e40af; font-size: 0.88rem; margin-bottom: 16px; align-items: center; gap: 8px;">
+              <span class="spinner" style="display:inline-block; width:16px; height:16px; border:2px solid #93c5fd; border-top-color:#1e40af; border-radius:50%; animation:spin 0.8s linear infinite;"></span>
+              <span id="mock-loading-text">Evaluating your response against role standards...</span>
+            </div>
+
+            <!-- Actions row -->
+            <div id="mock-action-btns" style="display: flex; gap: 10px; align-items: center;">
               <button type="button" id="mock-submit-btn" class="btn btn-primary">Submit Answer</button>
-              <button type="button" id="mock-next-btn" class="btn btn-primary" style="display: none;">Next Question →</button>
+              <button type="button" id="mock-skip-btn" class="btn btn-secondary">Skip</button>
+            </div>
+
+            <!-- Evaluation Card (Displayed after submission) -->
+            <div id="mock-evaluation-card" style="display: none; margin-top: 20px; padding: 18px; border-radius: 12px; background: #f8fafc; border: 1px solid #cbd5e1;">
+              
+              <!-- Evaluation Header: Score & Badge -->
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; padding-bottom: 12px; border-bottom: 1px solid #e2e8f0;">
+                <div>
+                  <div style="font-size: 0.78rem; color: #64748b; text-transform: uppercase; font-weight: 600;">Question Score</div>
+                  <div style="display: flex; align-items: baseline; gap: 8px;">
+                    <span id="eval-score-num" style="font-size: 1.8rem; font-weight: 800; color: #2563eb;">80</span>
+                    <span style="font-size: 0.9rem; color: #64748b;">/ 100</span>
+                    <span id="eval-verdict-badge" class="badge badge-success" style="margin-left: 6px;">Solid Understanding</span>
+                  </div>
+                </div>
+                <div style="text-align: right;">
+                  <span id="eval-badge-label" class="badge badge-tech" style="font-size: 0.78rem;">Demo mode (rule-based)</span>
+                  <div id="eval-confidence-text" style="font-size: 0.72rem; color: #64748b; margin-top: 4px;"></div>
+                </div>
+              </div>
+
+              <!-- 4 Criterion Rubric Bars -->
+              <div style="margin-bottom: 20px;">
+                <div style="font-size: 0.82rem; font-weight: 600; color: #334155; margin-bottom: 8px;">Rubric Breakdown (0 – 5 Scale):</div>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px;">
+                  <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; margin-bottom: 3px;">
+                      <span>Relevance</span>
+                      <strong id="bar-val-relevance">4.0 / 5</strong>
+                    </div>
+                    <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                      <div id="bar-fill-relevance" style="width: 80%; height: 100%; background: #2563eb; transition: width 0.4s;"></div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; margin-bottom: 3px;">
+                      <span>Completeness</span>
+                      <strong id="bar-val-completeness">3.5 / 5</strong>
+                    </div>
+                    <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                      <div id="bar-fill-completeness" style="width: 70%; height: 100%; background: #0284c7; transition: width 0.4s;"></div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; margin-bottom: 3px;">
+                      <span>Clarity</span>
+                      <strong id="bar-val-clarity">4.5 / 5</strong>
+                    </div>
+                    <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                      <div id="bar-fill-clarity" style="width: 90%; height: 100%; background: #10b981; transition: width 0.4s;"></div>
+                    </div>
+                  </div>
+
+                  <div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.78rem; margin-bottom: 3px;">
+                      <span>Example / Evidence</span>
+                      <strong id="bar-val-example">3.0 / 5</strong>
+                    </div>
+                    <div style="width: 100%; height: 8px; background: #e2e8f0; border-radius: 4px; overflow: hidden;">
+                      <div id="bar-fill-example" style="width: 60%; height: 100%; background: #f59e0b; transition: width 0.4s;"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- 3 Feedback Lists: Good (Green), Missing (Amber), How to Improve (Blue) -->
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-bottom: 18px;">
+                <div style="background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 8px; padding: 12px;">
+                  <div style="font-weight: 700; font-size: 0.85rem; color: #166534; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                    <span>✓</span> What Was Good
+                  </div>
+                  <ul id="eval-good-list" style="padding-left: 18px; font-size: 0.8rem; color: #15803d; line-height: 1.4;"></ul>
+                </div>
+
+                <div style="background: #fffbeb; border: 1px solid #fde68a; border-radius: 8px; padding: 12px;">
+                  <div style="font-weight: 700; font-size: 0.85rem; color: #92400e; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                    <span>⚠</span> What Was Missing
+                  </div>
+                  <ul id="eval-missing-list" style="padding-left: 18px; font-size: 0.8rem; color: #b45309; line-height: 1.4;"></ul>
+                </div>
+
+                <div style="background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 8px; padding: 12px;">
+                  <div style="font-weight: 700; font-size: 0.85rem; color: #1e40af; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
+                    <span>💡</span> How to Improve
+                  </div>
+                  <ul id="eval-tips-list" style="padding-left: 18px; font-size: 0.8rem; color: #1d4ed8; line-height: 1.4;"></ul>
+                </div>
+              </div>
+
+              <!-- Model Answer Accordion -->
+              <div style="margin-bottom: 16px; border: 1px solid #e2e8f0; border-radius: 8px; background: #ffffff;">
+                <button type="button" id="eval-better-ans-toggle" class="btn" style="width: 100%; text-align: left; padding: 10px 14px; background: transparent; border: none; font-size: 0.88rem; font-weight: 600; color: #2563eb; display: flex; justify-content: space-between; align-items: center;">
+                  <span>Show Strong Model Answer (80–150 words)</span>
+                  <span id="eval-better-ans-icon">▼</span>
+                </button>
+                <div id="eval-better-ans-content" style="display: none; padding: 14px; border-top: 1px solid #e2e8f0; font-size: 0.86rem; color: #334155; line-height: 1.6; background: #fdfdfd;">
+                  <div id="eval-better-ans-text"></div>
+                </div>
+              </div>
+
+              <!-- Side-by-Side Comparison Toggle -->
+              <div style="margin-bottom: 16px;">
+                <button type="button" id="eval-compare-toggle" class="btn btn-secondary" style="font-size: 0.8rem; padding: 6px 12px;">
+                  Compare With My Answer (Side-by-Side)
+                </button>
+                <div id="eval-compare-view" style="display: none; margin-top: 10px; grid-template-columns: 1fr 1fr; gap: 12px; background: #ffffff; padding: 12px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                  <div style="padding: 10px; background: #f8fafc; border-radius: 6px;">
+                    <div style="font-weight: 600; font-size: 0.8rem; color: #64748b; margin-bottom: 6px;">Your Written Answer:</div>
+                    <div id="compare-user-text" style="font-size: 0.82rem; color: #1e293b; line-height: 1.5; white-space: pre-wrap;"></div>
+                  </div>
+                  <div style="padding: 10px; background: #f0fdf4; border-radius: 6px; border: 1px solid #bbf7d0;">
+                    <div style="font-weight: 600; font-size: 0.8rem; color: #166534; margin-bottom: 6px;">Recommended Model Answer:</div>
+                    <div id="compare-model-text" style="font-size: 0.82rem; color: #15803d; line-height: 1.5;"></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Follow-Up Question Section (if present) -->
+              <div id="eval-followup-box" style="display: none; margin-bottom: 16px; padding: 12px; background: #faf5ff; border: 1px solid #e9d5ff; border-radius: 8px;">
+                <div style="font-weight: 700; font-size: 0.85rem; color: #7e22ce; margin-bottom: 4px;">AI Follow-Up Question:</div>
+                <div id="eval-followup-text" style="font-size: 0.85rem; color: #6b21a8; margin-bottom: 8px;"></div>
+                <input type="text" id="eval-followup-input" class="form-control" style="font-size: 0.85rem; background: #ffffff;" placeholder="Brief reflection or example to strengthen this area...">
+              </div>
+
+              <!-- Try Again with Improved Answer + Next Question Navigation -->
+              <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; padding-top: 8px;">
+                <div>
+                  <button type="button" id="eval-try-again-btn" class="btn btn-secondary" style="font-size: 0.84rem;">
+                    Try Again With Improved Answer
+                  </button>
+                </div>
+                <div>
+                  <button type="button" id="mock-next-btn" class="btn btn-primary" style="padding: 9px 20px;">
+                    Next Question →
+                  </button>
+                </div>
+              </div>
+
+              <!-- Honest Disclaimer Notice -->
+              <div style="margin-top: 14px; font-size: 0.72rem; color: #64748b; font-style: italic; text-align: center;">
+                Notice: AI feedback is a practice aid and can make mistakes. It is not a hiring decision.
+              </div>
+
             </div>
           </div>
 
           <!-- Final Results View -->
-          <div id="mock-results-card" style="display: none; text-align: center; padding: 24px 16px;">
-            <div style="font-size: 2.4rem; font-weight: 800; color: #2563eb;" id="res-score">80%</div>
-            <h3 style="font-size: 1.15rem; font-weight: 700; margin: 8px 0;">Mock Interview Completed!</h3>
-            <p id="res-accuracy" style="font-size: 0.9rem; color: #64748b; margin-bottom: 20px;"></p>
-
-            <div style="max-width: 420px; margin: 0 auto 24px; text-align: left; background: #f8fafc; padding: 16px; border-radius: 8px; border: 1px solid #e2e8f0;">
-              <h4 style="font-size: 0.88rem; font-weight: 600; margin-bottom: 8px;">Weak Topics to Revisit:</h4>
-              <ul id="res-weak-topics" style="padding-left: 20px; font-size: 0.85rem; color: #991b1b;"></ul>
+          <div id="mock-results-card" style="display: none; padding: 24px 16px;">
+            <div style="text-align: center; margin-bottom: 24px;">
+              <div style="font-size: 2.8rem; font-weight: 800; color: #2563eb;" id="res-score">80%</div>
+              <h3 style="font-size: 1.25rem; font-weight: 700; margin: 4px 0;">Mock Interview Completed!</h3>
+              <p id="res-accuracy" style="font-size: 0.9rem; color: #64748b;"></p>
             </div>
 
-            <div style="display: flex; justify-content: center; gap: 12px;">
+            <!-- Rubric Criteria Averages Summary -->
+            <div style="max-width: 650px; margin: 0 auto 24px; background: #f8fafc; padding: 16px; border-radius: 10px; border: 1px solid #e2e8f0;">
+              <h4 style="font-size: 0.9rem; font-weight: 700; margin-bottom: 12px; color: #1e293b;">Overall Criteria Breakdown</h4>
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(130px, 1fr)); gap: 10px; text-align: center;">
+                <div style="background: #ffffff; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                  <div style="font-size: 0.75rem; color: #64748b;">Relevance</div>
+                  <div id="res-avg-relevance" style="font-size: 1.2rem; font-weight: 700; color: #2563eb;">- / 5</div>
+                </div>
+                <div style="background: #ffffff; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                  <div style="font-size: 0.75rem; color: #64748b;">Completeness</div>
+                  <div id="res-avg-completeness" style="font-size: 1.2rem; font-weight: 700; color: #0284c7;">- / 5</div>
+                </div>
+                <div style="background: #ffffff; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                  <div style="font-size: 0.75rem; color: #64748b;">Clarity</div>
+                  <div id="res-avg-clarity" style="font-size: 1.2rem; font-weight: 700; color: #10b981;">- / 5</div>
+                </div>
+                <div style="background: #ffffff; padding: 10px; border-radius: 8px; border: 1px solid #e2e8f0;">
+                  <div style="font-size: 0.75rem; color: #64748b;">Example/Evidence</div>
+                  <div id="res-avg-example" style="font-size: 1.2rem; font-weight: 700; color: #f59e0b;">- / 5</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Strong vs Weak Topics -->
+            <div style="max-width: 650px; margin: 0 auto 24px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+              <div style="background: #f0fdf4; border: 1px solid #bbf7d0; padding: 14px; border-radius: 8px;">
+                <h4 style="font-size: 0.88rem; font-weight: 700; color: #166534; margin-bottom: 8px;">Strongest Topics (Score ≥ 75):</h4>
+                <ul id="res-strong-topics" style="padding-left: 18px; font-size: 0.82rem; color: #15803d; line-height: 1.5;"></ul>
+              </div>
+              <div style="background: #fff1f2; border: 1px solid #fecdd3; padding: 14px; border-radius: 8px;">
+                <h4 style="font-size: 0.88rem; font-weight: 700; color: #9f1239; margin-bottom: 8px;">Weak Topics to Revise (Score &lt; 60):</h4>
+                <ul id="res-weak-topics" style="padding-left: 18px; font-size: 0.82rem; color: #be123c; line-height: 1.5;"></ul>
+              </div>
+            </div>
+
+            <!-- Per-Question Review List -->
+            <div style="max-width: 650px; margin: 0 auto 24px; text-align: left;">
+              <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 12px; color: #0f172a;">Detailed Question Review</h4>
+              <div id="res-review-container"></div>
+            </div>
+
+            <!-- Navigation Actions -->
+            <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap;">
               <button type="button" id="mock-retry-btn" class="btn btn-secondary">Retry Mock Interview</button>
-              <a href="/pages/roadmap.html" class="btn btn-primary">Practice Weak Topics in Roadmap</a>
+              <button type="button" id="mock-practice-weak-btn" class="btn btn-primary" style="display: none;">Practice Weak Topics</button>
+              <a href="/pages/roadmap.html" class="btn btn-primary">Go to Roadmap for Weak Skills</a>
             </div>
           </div>
 
@@ -167,11 +378,15 @@
               <h2 class="card-title">Interview Question Bank</h2>
               <p class="card-subtitle" style="margin-bottom: 0;">Explore comprehensive technical questions and behavioral STAR scenarios.</p>
             </div>
-            <div style="display: flex; gap: 10px;">
+            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
               <select id="bank-role-filter" class="form-control" style="width: 170px;">
                 <option value="all">All Roles</option>
                 <option value="python-developer">Python Developer</option>
+                <option value="web-developer">Web Developer</option>
+                <option value="data-analyst">Data Analyst</option>
                 <option value="finance">Finance Analyst</option>
+                <option value="digital-marketing">Digital Marketing</option>
+                <option value="human-resources">Human Resources</option>
               </select>
               <select id="bank-cat-filter" class="form-control" style="width: 140px;">
                 <option value="all">All Categories</option>
@@ -200,7 +415,7 @@
       </main>
 
       <footer class="footer-disclaimer">
-        InternPath AI gives preparation guidance, not a guarantee of selection. Sample internships are demo data.
+        InternPath AI gives preparation guidance, not a guarantee of selection. Sample internships and questions are demo data.
       </footer>
     </div>
   </div>

@@ -30,12 +30,20 @@ All responses are returned as structured JSON:
 * `GET /api/projects`: Returns recommended projects and milestone status.
 * `PUT /api/projects/<id>/status`: Updates project status and milestones array.
 
-### Interview Preparation (`/api/interview`)
-* `GET /api/interview/questions`: Returns question bank filtered by role, category, or difficulty.
-* `POST /api/interview/mock/start`: Initializes a mock interview session and returns masked questions.
-* `POST /api/interview/mock/answer`: Evaluates candidate answer via rule-based keyword logic.
-* `POST /api/interview/mock/finish`: Records mock interview session score, accuracy, and weak topics.
-* `GET /api/interview/stats`: Returns aggregate student practice attempts and topic-wise accuracy.
+### Interview Preparation & AI Mock Interview (`/api/interview`)
+* `GET /api/interview/questions`: Returns question bank filtered by role, category, or difficulty. Query parameters: `role`, `category`, `difficulty`.
+* `POST /api/interview/mock/start`: Initializes a mock interview session and returns masked questions. Body: `{ role: string, category: string, difficulty: string, num_questions: number, focus_missing_skills: boolean, weak_topics_only: boolean, weak_topics: string[] }`.
+  - Determines mode (`openai` if API key set & quota available, else `demo`).
+  - Strict role-appropriateness: non-technical tracks (Finance, HR, Marketing) never receive programming questions.
+  - Returns: `{ session_id, mode, badge, questions: [{ id, role, category, difficulty, topic, skill, type, question, options }] }`.
+* `POST /api/interview/mock/answer`: Evaluates student written or MCQ answer against strict rubric criteria. Body: `{ session_id: string, question_id: string, answer: string, is_retry: boolean }`.
+  - Sanity check: answers under 10 words or copied questions are capped at max 20 score with explanation.
+  - Prompt injection defense: treats student answer strictly as data.
+  - Server calculation: computes `question_score = round(average(4 criteria) * 20)` (0-100 scale).
+  - Returns: `{ is_correct, score, scores: { relevance, completeness, clarity, example_or_evidence }, what_was_good, what_was_missing, improvement_tips, better_answer, topics_to_revise, confidence_note, follow_up_question, mode, badge, notice }`.
+* `POST /api/interview/mock/finish`: Finalizes mock session, calculates overall average score, criterion averages, strong topics ($\ge 75$), weak topics ($< 60$), and persists to `mock_interviews`. Body: `{ session_id: string }`.
+  - Returns: `{ mock_id, score, accuracy, criterion_averages, strong_topics, weak_topics, review, badge, notice }`.
+* `GET /api/interview/stats`: Returns aggregate student practice attempts, average score, and topic-wise breakdown with strict user isolation (`WHERE user_id = ?`).
 
 ### Readiness, Internships, Progress & Admin
 * `GET /api/readiness`: Computes 5-pillar deterministic readiness score and AI coaching summary.

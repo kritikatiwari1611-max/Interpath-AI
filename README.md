@@ -73,7 +73,7 @@ Final Destination: Matched Internships (with "Prepare to Apply" Credentials Veri
 | **Obj 5** | Personalized 4-stage roadmap | Foundation → Practice → Project → Interview derived from missing skills | `backend/services/roadmap_service.py` |
 | **Obj 6** | Learning and Practice Hub | Video tutorials, documentation, and practical exercises with completion toggles | `backend/routes/resources.py` |
 | **Obj 7** | Project recommendations with milestones | Role-matched projects, milestone completion tracking, status management | `backend/routes/projects.py` |
-| **Obj 8** | Interview preparation & mock test | 12+ questions per role, live mock interview, keyword feedback, weak topic detection | `backend/services/interview_service.py` |
+| **Obj 8** | Interview preparation & AI mock test | Role-tailored questions (no coding for non-tech), 4-criteria rubric evaluation (0–5), server score calculation, model answer accordion, side-by-side comparison, retry with improvement, and weak topic drills | `backend/services/interview_service.py` |
 | **Obj 9** | Transparent readiness score | 5-pillar weighted formula (35% skills, 25% projects, 15% resume, 20% interview, 5% certs) | `backend/services/readiness_service.py` |
 | **Obj 10** | Internship matching engine | Ranked match percentage based on skills (60%), role (25%), and interests (15%) | `backend/services/matching_service.py` |
 | **Obj 11** | Progress tracking from saved activity | Real-time aggregate metric calculations across skills, tasks, and test accuracy | `backend/routes/progress.py` |
@@ -145,7 +145,7 @@ $$\text{Overall Score} = \frac{\sum (\text{Category Score} \times \text{Weight})
 ---
 
 ## 🧪 Automated Testing
-Run the complete automated test suite (28 unit & integration tests):
+Run the complete automated test suite (37 unit & integration tests):
 ```bash
 pytest
 ```

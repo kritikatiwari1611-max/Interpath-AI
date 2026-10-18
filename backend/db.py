@@ -99,8 +99,14 @@ def init_db():
             ("user_projects", "github_link", "TEXT DEFAULT ''"),
             ("user_projects", "demo_link", "TEXT DEFAULT ''"),
             ("user_projects", "report_filename", "TEXT DEFAULT ''"),
-            ("user_projects", "report_original_name", "TEXT DEFAULT ''"),
-            ("resource_progress", "status", "TEXT DEFAULT 'pending'")
+            ("resource_progress", "status", "TEXT DEFAULT 'pending'"),
+            ("interview_attempts", "score", "INTEGER DEFAULT 0"),
+            ("interview_attempts", "mode", "TEXT DEFAULT 'demo'"),
+            ("interview_attempts", "feedback_json", "TEXT DEFAULT '{}'"),
+            ("mock_interviews", "mode", "TEXT DEFAULT 'demo'"),
+            ("mock_interviews", "session_id", "TEXT DEFAULT ''"),
+            ("mock_interviews", "details_json", "TEXT DEFAULT '[]'"),
+            ("mock_interviews", "topic_results", "TEXT DEFAULT '{}'")
         ]
         for tbl, col, col_def in migrations:
             try:
